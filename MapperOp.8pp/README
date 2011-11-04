@@ -1,0 +1,7 @@
+This is a mapping operator for the eightplusplus language development platform
+
+It will map a specified quad of a given texture using cv perspective transform
+
+It is designed to make most of the computations on the GPU and be used as a static library
+
+This operator could not have been written with the help of incredible Paul Houx   
