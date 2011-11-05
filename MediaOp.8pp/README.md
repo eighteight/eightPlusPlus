@@ -1,0 +1,15 @@
+Proof of concept implementation of the eight++ language framework
+
+This is a Eclipse CDT project
+
+Follow the development at http://eightplusplus.blogspot.com/
+
+Prerequisites:
+
+https://github.com/cinder/Cinder
+
+http://www.codesynthesis.com/projects/xsd/
+
+http://xerces.apache.org/xerces-c/
+
+(Since Cinder is currently compiled only for 32 bit architecture, care should be taken to ensure that other components are also 32 bit, for example if you build xerces-c yourself on OS X, use "-arch i386" flag)
