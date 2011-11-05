@@ -1,0 +1,3 @@
+This is a simple test program for TrackerOp.8pp operator for the eight++ visual language development platform
+
+Specify one of the supported tracker types using type constants in TrackerFactory.h
