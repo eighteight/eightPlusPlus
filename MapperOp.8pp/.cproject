@@ -243,9 +243,8 @@
 								<option id="gnu.cpp.compiler.macosx.so.debug.option.debugging.level.1672650286" name="Debug Level" superClass="gnu.cpp.compiler.macosx.so.debug.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.1694349802" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/boost&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/blocks/Cinder-OpenCV/include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/boost/boost&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/blocks/Cinder-OpenCV/include&quot;"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.other.other.563778838" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 -arch i386 " valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1188755790" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
@@ -255,9 +254,8 @@
 								<option id="gnu.c.compiler.macosx.so.debug.option.debugging.level.20732296" name="Debug Level" superClass="gnu.c.compiler.macosx.so.debug.option.debugging.level" value="gnu.c.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.include.paths.1909243350" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/boost&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/blocks/Cinder-OpenCV/include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/boost/boost&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/blocks/Cinder-OpenCV/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MapperOp.8pp/src}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.228642370" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -278,20 +276,26 @@
 	<storageModule moduleId="refreshScope" versionNumber="1">
 		<resource resourceType="PROJECT" workspacePath="/MapperOp.8pp"/>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.macosx.so.debug.1407158987;cdt.managedbuild.config.macosx.so.debug.1407158987.;cdt.managedbuild.tool.gnu.cpp.compiler.macosx.so.debug.1108908314;cdt.managedbuild.tool.gnu.cpp.compiler.input.78246078">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP"/>
-		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.macosx.so.release.60581261;cdt.managedbuild.config.macosx.so.release.60581261.;cdt.managedbuild.tool.gnu.cpp.compiler.macosx.so.release.137043125;cdt.managedbuild.tool.gnu.cpp.compiler.input.774598454">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP"/>
 		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.macosx.so.debug.1407158987;cdt.managedbuild.config.macosx.so.debug.1407158987.;cdt.managedbuild.tool.gnu.cpp.compiler.macosx.so.debug.1108908314;cdt.managedbuild.tool.gnu.cpp.compiler.input.78246078">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.macosx.so.debug.1407158987.1865195124;cdt.managedbuild.config.macosx.so.debug.1407158987.1865195124.;cdt.managedbuild.tool.gnu.cpp.compiler.macosx.so.debug.2017453366;cdt.managedbuild.tool.gnu.cpp.compiler.input.1188755790">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP"/>
+		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.macosx.so.debug.1407158987;cdt.managedbuild.config.macosx.so.debug.1407158987.;cdt.managedbuild.tool.gnu.c.compiler.macosx.so.debug.1727503155;cdt.managedbuild.tool.gnu.c.compiler.input.757075088">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.macosx.so.debug.1407158987.1865195124;cdt.managedbuild.config.macosx.so.debug.1407158987.1865195124.;cdt.managedbuild.tool.gnu.c.compiler.macosx.so.debug.1191542883;cdt.managedbuild.tool.gnu.c.compiler.input.228642370">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC"/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.macosx.so.release.60581261;cdt.managedbuild.config.macosx.so.release.60581261.;cdt.managedbuild.tool.gnu.c.compiler.macosx.so.release.350479304;cdt.managedbuild.tool.gnu.c.compiler.input.1397758474">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC"/>
 		</scannerConfigBuildInfo>
 	</storageModule>
-	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cproject>
