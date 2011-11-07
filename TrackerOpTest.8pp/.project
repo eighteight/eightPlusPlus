@@ -3,6 +3,7 @@
 	<name>TrackerOpTest.8pp</name>
 	<comment></comment>
 	<projects>
+		<project>TrackerOp.8pp</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

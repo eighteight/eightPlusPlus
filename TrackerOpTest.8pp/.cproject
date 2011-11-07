@@ -36,21 +36,21 @@
 							<tool id="cdt.managedbuild.tool.macosx.c.linker.macosx.base.1372902259" name="MacOS X C Linker" superClass="cdt.managedbuild.tool.macosx.c.linker.macosx.base"/>
 							<tool id="cdt.managedbuild.tool.macosx.cpp.linker.macosx.base.293963466" name="MacOS X C++ Linker" superClass="cdt.managedbuild.tool.macosx.cpp.linker.macosx.base">
 								<option id="macosx.cpp.link.option.paths.606959176" name="Library search path (-L)" superClass="macosx.cpp.link.option.paths" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TrackerOp.8pp/lib}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TrackerOp.8pp/libs}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/blocks/Cinder-OpenCV/lib/macosx&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${NITE_PATH}/Bin&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TrackerOp.8pp/libs}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TrackerOp.8pp/lib}&quot;"/>
 								</option>
 								<option id="macosx.cpp.link.option.libs.1593998636" name="Libraries (-l)" superClass="macosx.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="OpenNI"/>
+									<listOptionValue builtIn="false" value="TrackerOp"/>
+									<listOptionValue builtIn="false" value="freenect"/>
 									<listOptionValue builtIn="false" value="opencv_core"/>
 									<listOptionValue builtIn="false" value="opencv_imgproc"/>
+									<listOptionValue builtIn="false" value="XnVNite_1_4_2"/>
 									<listOptionValue builtIn="false" value="XnVHandGenerator_1_4_2"/>
 									<listOptionValue builtIn="false" value="XnVFeatures_1_4_2"/>
-									<listOptionValue builtIn="false" value="XnVNite_1_4_2"/>
-									<listOptionValue builtIn="false" value="freenect"/>
 									<listOptionValue builtIn="false" value="usb-1.0"/>
-									<listOptionValue builtIn="false" value="TrackerOp"/>
+									<listOptionValue builtIn="false" value="OpenNI"/>
 								</option>
 								<option id="macosx.cpp.link.option.other.93030701" name="Other options (-Xlinker [option])" superClass="macosx.cpp.link.option.other" valueType="stringList">
 									<listOptionValue builtIn="false" value="${CINDER_PATH}/lib/libcinder_d.a -lcurl"/>
@@ -65,6 +65,17 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.macosx.base.1794367113" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.macosx.base">
 								<option id="gnu.both.asm.option.include.paths.1027531129" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TrackerOp.8pp/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TrackerOp.8pp/includes}&quot;"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/nite-bin-macosx-v1.4.2.4/include/"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/OpenNI/include/"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/Cinder/boost"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/Cinder/blocks/Cinder-Kinect/include"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/Cinder/blocks/Cinder-Kinect/src"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/Cinder/blocks/Cinder-OpenCV/include"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/Cinder/include"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/Cinder/blocks/BlockOpenNI/include"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/Cinder/blocks/BlockOpenNI/include/OpenNI"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/blocks/BlockOpenNI/include/OpenNI&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/blocks/BlockOpenNI/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/include&quot;"/>
@@ -75,13 +86,23 @@
 									<listOptionValue builtIn="false" value="&quot;${NITE_PATH}/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${OPENNI_PATH}/include/&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${NITE_PATH}/include/&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TrackerOp.8pp/src}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1687806337" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.archiver.macosx.base.1235337741" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.macosx.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.macosx.base.1876156651" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.macosx.base">
 								<option id="gnu.cpp.compiler.option.include.paths.522131004" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TrackerOp.8pp/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TrackerOp.8pp/includes}&quot;"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/nite-bin-macosx-v1.4.2.4/include/"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/OpenNI/include/"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/Cinder/boost"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/Cinder/blocks/Cinder-Kinect/include"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/Cinder/blocks/Cinder-Kinect/src"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/Cinder/blocks/Cinder-OpenCV/include"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/Cinder/include"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/Cinder/blocks/BlockOpenNI/include"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/Cinder/blocks/BlockOpenNI/include/OpenNI"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/blocks/Cinder-OpenCV/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/blocks/Cinder-Kinect/src&quot;"/>
@@ -90,7 +111,6 @@
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/blocks/BlockOpenNI/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${OPENNI_PATH}/include/&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${NITE_PATH}/include/&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TrackerOp.8pp/src}&quot;"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.optimization.level.960717740" name="Optimization Level" superClass="gnu.cpp.compiler.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.other.other.1735799906" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 -arch i386" valueType="string"/>
@@ -99,6 +119,17 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.macosx.base.1908464243" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.macosx.base">
 								<option id="gnu.c.compiler.option.misc.other.1901101210" name="Other flags" superClass="gnu.c.compiler.option.misc.other" value="-c -fmessage-length=0 -arch i386" valueType="string"/>
 								<option id="gnu.c.compiler.option.include.paths.1778802642" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TrackerOp.8pp/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TrackerOp.8pp/includes}&quot;"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/nite-bin-macosx-v1.4.2.4/include/"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/OpenNI/include/"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/Cinder/boost"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/Cinder/blocks/Cinder-Kinect/include"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/Cinder/blocks/Cinder-Kinect/src"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/Cinder/blocks/Cinder-OpenCV/include"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/Cinder/include"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/Cinder/blocks/BlockOpenNI/include"/>
+									<listOptionValue builtIn="false" value="/Users/eight/repos/Cinder/blocks/BlockOpenNI/include/OpenNI"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/blocks/BlockOpenNI/include/OpenNI&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/blocks/Cinder-OpenCV/include&quot;"/>
@@ -108,7 +139,6 @@
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/blocks/BlockOpenNI/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${OPENNI_PATH}/include/&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${NITE_PATH}/include/&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TrackerOp.8pp/src}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.718522749" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -119,7 +149,36 @@
 					</sourceEntries>
 				</configuration>
 			</storageModule>
-			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings">
+				<externalSettings containerId="TrackerOp.8pp;cdt.managedbuild.toolchain.gnu.macosx.base.1873825215.1383769673" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
+					<externalSetting>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/TrackerOp.8pp/src"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/TrackerOp.8pp/includes"/>
+						<entry flags="RESOLVED" kind="includePath" name="/Users/eight/repos/nite-bin-macosx-v1.4.2.4/include/"/>
+						<entry flags="RESOLVED" kind="includePath" name="/Users/eight/repos/OpenNI/include/"/>
+						<entry flags="RESOLVED" kind="includePath" name="/Users/eight/repos/Cinder/boost"/>
+						<entry flags="RESOLVED" kind="includePath" name="/Users/eight/repos/Cinder/blocks/Cinder-Kinect/include"/>
+						<entry flags="RESOLVED" kind="includePath" name="/Users/eight/repos/Cinder/blocks/Cinder-Kinect/src"/>
+						<entry flags="RESOLVED" kind="includePath" name="/Users/eight/repos/Cinder/blocks/Cinder-OpenCV/include"/>
+						<entry flags="RESOLVED" kind="includePath" name="/Users/eight/repos/Cinder/include"/>
+						<entry flags="RESOLVED" kind="includePath" name="/Users/eight/repos/Cinder/blocks/BlockOpenNI/include"/>
+						<entry flags="RESOLVED" kind="includePath" name="/Users/eight/repos/Cinder/blocks/BlockOpenNI/include/OpenNI"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/TrackerOp.8pp/lib"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/TrackerOp.8pp/libs"/>
+						<entry flags="" kind="libraryPath" name="${CINDER_PATH}/blocks/Cinder-OpenCV/lib/macosx"/>
+						<entry flags="" kind="libraryPath" name="${NITE_PATH}/Bin"/>
+						<entry flags="RESOLVED" kind="libraryFile" name="TrackerOp"/>
+						<entry flags="" kind="libraryFile" name="freenect"/>
+						<entry flags="" kind="libraryFile" name="opencv_core"/>
+						<entry flags="" kind="libraryFile" name="opencv_imgproc"/>
+						<entry flags="" kind="libraryFile" name="XnVNite_1_4_2"/>
+						<entry flags="" kind="libraryFile" name="XnVHandGenerator_1_4_2"/>
+						<entry flags="" kind="libraryFile" name="XnVFeatures_1_4_2"/>
+						<entry flags="" kind="libraryFile" name="usb-1.0"/>
+						<entry flags="" kind="libraryFile" name="OpenNI"/>
+					</externalSetting>
+				</externalSettings>
+			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.language.mapping"/>
 			<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 		</cconfiguration>
