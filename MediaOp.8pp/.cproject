@@ -64,6 +64,7 @@
 								</option>
 								<option id="gnu.cpp.compiler.option.optimization.level.784503725" name="Optimization Level" superClass="gnu.cpp.compiler.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.other.other.1210369919" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 -arch i386" valueType="string"/>
+								<option id="gnu.cpp.compiler.option.warnings.allwarn.1148760966" superClass="gnu.cpp.compiler.option.warnings.allwarn" value="false" valueType="boolean"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1837324715" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.macosx.base.1789513716" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.macosx.base">
@@ -73,6 +74,7 @@
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/boost/boost&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/include&quot;"/>
 								</option>
+								<option id="gnu.c.compiler.option.warnings.allwarn.761634217" superClass="gnu.c.compiler.option.warnings.allwarn" value="false" valueType="boolean"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1197580005" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
 						</toolChain>
