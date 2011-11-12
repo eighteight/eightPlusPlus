@@ -18,7 +18,7 @@ void TrackerOpTest::setup()
 }
 
 void TrackerOpTest::setupTracker(){
-	tracker = TrackerFactory::makeTracker(HAND_GESTURE_TRACKER);
+	tracker = TrackerFactory::makeTracker(EASY_TRACKER);
 	tracker->setup(&currentShift);
 //	tracker->signalPositionUpdate.connect(bind(&PositionListener::updatePosition,&positionListener, boost::lambda::_1));
 }
