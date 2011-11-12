@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+
+  <xsd:complexType name="eightPlusPlusApp_t">
+
+    <xsd:annotation>
+      <xsd:documentation>
+        The Revolver tiny visual domain specific language
+        The Revolver TVDSL
+        for the play by Maya Pramatarova "The Revolver"
+        onewaytheater.us production
+      </xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:sequence>
+
+    	<xsd:element maxOccurs="unbounded" name="mapper" type="Mapper">
+    		<xsd:annotation>
+    			<xsd:documentation>
+    				Mapper controls image projection mapping, cropping,
+    				quad warping and translation
+    			</xsd:documentation>
+    		</xsd:annotation>
+    	</xsd:element>
+
+
+    	<xsd:element maxOccurs="1" minOccurs="0" name="tracker" type="Tracker">
+    		<xsd:annotation>
+    			<xsd:documentation>
+    				Tracker allows human tracking on the performance
+    				stage
+    			</xsd:documentation>
+    		</xsd:annotation>
+    	</xsd:element>
+    	<xsd:element maxOccurs="unbounded" minOccurs="0" name="media" type="Medium">
+    	</xsd:element>
+    	<xsd:element maxOccurs="unbounded" minOccurs="0" name="link" type="Link"/>
+    </xsd:sequence>
+
+  </xsd:complexType>
+  
+
+
+  <xsd:element name="eightPlusPlusApp" type="eightPlusPlusApp_t">
+    <xsd:annotation>
+      <xsd:documentation>
+        The eightPlusPlusApp element is a root of the eightPlusPlusApp XML vocabulary.
+        Every application document should start with this element.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+
+  <xsd:complexType name="Medium">
+  	<xsd:complexContent>
+  		<xsd:extension base="Linkable">
+  			<xsd:attribute name="path" type="xsd:string"/>
+
+  			<xsd:attribute name="type" type="MediumTypeDict"/>
+
+  		</xsd:extension>
+  	</xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="Tracker">
+  	<xsd:complexContent>
+  		<xsd:extension base="Linkable">
+                <xsd:attribute name="name" type="xsd:string" />
+                <xsd:attribute name="type" type="TrackerTypeDict"/>
+  		</xsd:extension>
+  	</xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="Mapper">
+  	<xsd:complexContent>
+  		<xsd:extension base="Linkable">
+  			<xsd:attribute name="name" type="xsd:string" use="required"/>
+
+  			<xsd:attribute name="x" type="xsd:int" use="required"/>
+
+  			<xsd:attribute name="y" type="xsd:int" use="required"/>
+
+  			<xsd:attribute name="w" type="xsd:int" use="required"/>
+
+  			<xsd:attribute name="h" type="xsd:int" use="required"/>
+
+  			<xsd:attribute name="winX0" type="xsd:float" use="required"/>
+
+  			<xsd:attribute name="winY0" type="xsd:float" use="required"/>
+
+  			<xsd:attribute name="winX1" type="xsd:float" use="required"/>
+
+  			<xsd:attribute name="winY1" type="xsd:float" use="required"/>
+
+  		</xsd:extension>
+  	</xsd:complexContent>
+  </xsd:complexType>
+
+
+  <xsd:simpleType name="TrackerTypeDict">
+  	<xsd:restriction base="xsd:string">
+  		<xsd:enumeration value="EasyTracker"/>
+  		<xsd:enumeration value="HandGestureTracker"/>
+  		<xsd:enumeration value="HandOpenCVTracker"/>
+  	</xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="MediumTypeDict">
+  	<xsd:restriction base="xsd:string">
+  		<xsd:enumeration value="video"/>
+  		<xsd:enumeration value="image"/>
+  	</xsd:restriction>
+  </xsd:simpleType>
+
+
+  <xsd:complexType name="Link">
+  	<xsd:attribute ecore:reference="Linkable" name="Source" type="xsd:anyURI" use="required"/>
+  	<xsd:attribute ecore:reference="Linkable" name="Target" type="xsd:anyURI" use="required"/>
+  </xsd:complexType>
+
+  <xsd:complexType abstract="true" name="Linkable">
+  	<xsd:sequence>
+  		<xsd:element maxOccurs="unbounded" minOccurs="0" name="Link" type="Link"/>
+  	</xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

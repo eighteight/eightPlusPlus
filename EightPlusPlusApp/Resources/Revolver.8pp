@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<eightPlusPlusApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../parser/eightPlusPlus.xsd">
+
+  <mapper name="MapperLeft" x="10" y="30" w="95" h="240" winX0="0" winY0="0" winX1="0.33" winY1="1"/>
+  
+  <mapper name="MapperCenter" x="220" y="30" w="190" h="240" winX0="0.33" winY0="0" winX1="0.66" winY1="1"/>
+  <mapper name="MapperRight" x="520" y="30" w="190" h="240" winX0="0.66" winY0="0" winX1="1.0" winY1="1"/>
+  <tracker type="EasyTracker"/>
+  
+  <media path="/Users/eight/Desktop/water.mov" type="video"/>
+
+</eightPlusPlusApp>
