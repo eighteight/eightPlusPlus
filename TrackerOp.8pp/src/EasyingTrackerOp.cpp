@@ -84,18 +84,12 @@ void   EasyingTracker::resetElapsedSeconds(){
 
 void EasyingTracker::draw()
 {
-	glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
-	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 	gl::setMatricesWindow(100,100 );
-	// this pair of lines is the standard way to clear the screen in OpenGL
-	gl::clear( Color( 0.1f, 0.1f, 0.1f ) );
-
-
 	// We'll set the color to an orange color
 	glColor3f( 1.0f, 0.5f, 0.25f );
 
 	gl::drawSolidCircle (Vec2f((float)shift, 200.0f), 4.0f );
-	cout<<shift<<std::endl;
+
 	// tell OpenGL to actually draw the lines now
 	glEnd();
 }
