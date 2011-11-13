@@ -110,7 +110,6 @@ bool MediaOp::hasCurrentMovie(){
 }
 
 qtime::MovieGl MediaOp::getCurrentMovie(){
-	console() << "FFFF "<<currentMovieNumber << endl;
 	currentMovieNumber = 0;
 	qtime::MovieGl video  = movies[currentMovieNumber];
 
