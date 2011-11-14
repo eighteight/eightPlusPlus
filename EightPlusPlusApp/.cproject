@@ -34,7 +34,6 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MapperOp.8pp/lib}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/blocks/Cinder-OpenCV/lib/macosx&quot;"/>
 									<listOptionValue builtIn="false" value="/usr/lib"/>
-									<listOptionValue builtIn="false" value="/opt/xerces-c/lib"/>
 								</option>
 								<option id="macosx.cpp.link.option.libs.1593998636" name="Libraries (-l)" superClass="macosx.cpp.link.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="TrackerOp"/>
@@ -78,7 +77,6 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MediaOp.8pp}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MapperOp.8pp}&quot;"/>
 									<listOptionValue builtIn="false" value="/opt/xsd/libxsd"/>
-									<listOptionValue builtIn="false" value="/opt/xerces-c/include"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/boost&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/boost/boost&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/include&quot;"/>

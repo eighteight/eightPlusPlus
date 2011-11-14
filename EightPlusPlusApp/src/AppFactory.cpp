@@ -23,8 +23,11 @@ AppFactory::AppFactory(const string &xmlFilePath) {
 				!= revolverApp->getMapper().end(); ++mapper) {
 			cout << " Mapper: " << (*mapper).getName() << endl;
 
-			//Linkable links = (*mapper).getLink();
+			Linkable::LinkSequence links = (*mapper).getLink();
 
+			for (EightPlusPlusApp_t::LinkConstIterator linkIt(links.begin()); linkIt != links.end(); ++linkIt) {
+				cout<<"Link "<<(*linkIt).getSource()<<endl;
+			}
 
 			 int x = (*mapper).getX();
 			 int y = (*mapper).getY();
