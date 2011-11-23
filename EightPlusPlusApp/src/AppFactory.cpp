@@ -7,10 +7,15 @@
 
 #include "AppFactory.h"
 
-AppFactory::AppFactory(const string &xmlFilePath) {
-
+AppFactory::AppFactory(const string & appPath, const string &xmlFilePath) {
+	bool error = false;
 	try {
-		auto_ptr<EightPlusPlusApp_t> revolverApp = parseEightPlusPlusApp(xmlFilePath);
+console()<<"app path"<<appPath<<endl;
+		xml_schema::Properties props;
+		props.no_namespace_schema_location ("file://"+appPath+"/Contents/Resources/eightPlusPlus.xsd");
+		//props.schema_location ("http://www.w3.org/XML/1998/namespace", "xml.xsd");
+
+		auto_ptr<EightPlusPlusApp_t> revolverApp = parseEightPlusPlusApp(xmlFilePath, 0, props);
 		for (EightPlusPlusApp_t::MediaConstIterator medium(
 				revolverApp->getMedia().begin()); medium
 				!= revolverApp->getMedia().end(); ++medium) {
@@ -53,6 +58,11 @@ AppFactory::AppFactory(const string &xmlFilePath) {
 		}
 	} catch (const xml_schema::Exception& e) {
 		cerr << e << endl;
+		error = true;
+	}
+	if (error){
+		console()<<"Please provide valid application file. Exiting."<<endl;
+		exit(1);
 	}
 }
 

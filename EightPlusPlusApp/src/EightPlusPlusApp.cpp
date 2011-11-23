@@ -4,17 +4,12 @@ void EightPlusPlusApp::setup() {
 
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
-	console() << "Arguments: " << std::endl;
-	for( vector<string>::const_iterator argIt = getArgs().begin(); argIt != getArgs().end(); ++argIt )
-		console() << " " << *argIt << std::endl;
-
-
 	if (getArgs().size()<2) {
-		console()<< "No application file is given. Exiting."<<endl;
+	    cerr << "usage: " << getArgs()[0] << " <applicationFilePath>\n. Exiting." << endl;
 		exit(0);
 	}
 
-	appFactory = AppFactory(getArgs()[1]);
+	appFactory = AppFactory(getAppPath().string(),getArgs()[1]);
 
 	currentShift = 0;
 	setupTracker();

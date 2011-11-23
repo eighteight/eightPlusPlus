@@ -22,7 +22,7 @@ using namespace cinder;
 class AppFactory {
 public:
 	AppFactory(){};
-	AppFactory(const string &xmlFilePath);
+	AppFactory(const string & appPath, const string &xmlFilePath);
 
 	virtual ~AppFactory();
 
