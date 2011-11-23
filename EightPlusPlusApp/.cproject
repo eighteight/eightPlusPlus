@@ -16,7 +16,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" description="" id="cdt.managedbuild.toolchain.gnu.macosx.base.1873825215" name="Default" parent="org.eclipse.cdt.build.core.emptycfg" postbuildStep="mkdir -p ${BuildArtifactFileName}.app/Contents/MacOS ; mv ${BuildArtifactFileName} ${BuildArtifactFileName}.app/Contents/MacOS/ ; cp -rf ../Resources ${BuildArtifactFileName}.app/Contents/Resources ; cp -rf ../Resources/Info.plist ${BuildArtifactFileName}.app/Contents/Info.plist">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" description="" id="cdt.managedbuild.toolchain.gnu.macosx.base.1873825215" name="Default" parent="org.eclipse.cdt.build.core.emptycfg" postbuildStep="mkdir -p ${BuildArtifactFileName}.app/Contents/MacOS ; mv ${BuildArtifactFileName} ${BuildArtifactFileName}.app/Contents/MacOS/ ; cp -rf ../Resources ${BuildArtifactFileName}.app/Contents/; cp -rf ../Resources/Info.plist ${BuildArtifactFileName}.app/Contents/Info.plist ; cp -rf ../parser/*.xsd ${BuildArtifactFileName}.app/Contents/Resources;">
 					<folderInfo id="cdt.managedbuild.toolchain.gnu.macosx.base.1873825215.1228186462" name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.macosx.base.2126172436" name="cdt.managedbuild.toolchain.gnu.macosx.base" superClass="cdt.managedbuild.toolchain.gnu.macosx.base">
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.MachO64" id="cdt.managedbuild.target.gnu.platform.macosx.base.97162131" name="Debug Platform" osList="macosx" superClass="cdt.managedbuild.target.gnu.platform.macosx.base"/>
@@ -240,12 +240,12 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="cdt.managedbuild.toolchain.gnu.macosx.base.1873825215.1563235116" name="eightPlusPlus.xsd" rcbsApplicability="override" resourcePath="parser/eightPlusPlus.xsd" toolsToInvoke="org.eclipse.cdt.managedbuilder.ui.rcbs.18520305">
-						<tool announcement="compiling eightPlusPlus.xsd" command="/opt/xsd/bin/xsd cxx-tree --type-naming java --function-naming java --generate-inline --output-dir ../parser ../parser/eightPlusPlus.xsd" customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.18520305" name="Resource Custom Build Step">
-							<inputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.inputtype.547696475" name="Resource Custom Build Step Input Type">
+					<fileInfo id="cdt.managedbuild.toolchain.gnu.macosx.base.1873825215.1942516176" name="eightPlusPlus.xsd" rcbsApplicability="override" resourcePath="parser/eightPlusPlus.xsd" toolsToInvoke="org.eclipse.cdt.managedbuilder.ui.rcbs.1148304447">
+						<tool announcement="Compile eightPlusPlus.xsd" command="/opt/xsd/bin/xsd cxx-tree --type-naming java --function-naming java --generate-inline --output-dir ../parser ../parser/eightPlusPlus.xsd" customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.1148304447" name="Resource Custom Build Step">
+							<inputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.inputtype.1863118312" name="Resource Custom Build Step Input Type">
 								<additionalInput kind="additionalinputdependency" paths=""/>
 							</inputType>
-							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.442706866" name="Resource Custom Build Step Output Type" outputNames="../parser/eightPlusPlus.hxx;../parser/eightPlusPlus.cxx;../parser/eightPlusPlus.ixx"/>
+							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.1247990611" name="Resource Custom Build Step Output Type" outputNames="../parser/eightPlusPlus.hxx;../parser/eightPlusPlus.cxx;../parser/eightPlusPlus.ixx"/>
 						</tool>
 					</fileInfo>
 					<sourceEntries>
@@ -306,18 +306,6 @@
 	<storageModule moduleId="refreshScope" versionNumber="1">
 		<resource resourceType="PROJECT" workspacePath="/EightPlusPlusApp"/>
 	</storageModule>
-	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
-		<buildTargets>
-			<target name="Bootstrap" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
-				<buildCommand>make</buildCommand>
-				<buildArguments>-j</buildArguments>
-				<buildTarget>../parser/eightPlusPlus.hxx</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>true</useDefaultCommand>
-				<runAllBuilders>true</runAllBuilders>
-			</target>
-		</buildTargets>
-	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="EightPlusPlusApp.null.1767893137" name="EightPlusPlusApp"/>
 	</storageModule>
@@ -347,5 +335,17 @@
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.macosx.base.1873825215;cdt.managedbuild.toolchain.gnu.macosx.base.1873825215.1228186462;cdt.managedbuild.tool.gnu.c.compiler.macosx.base.1908464243;cdt.managedbuild.tool.gnu.c.compiler.input.718522749">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC"/>
 		</scannerConfigBuildInfo>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
+		<buildTargets>
+			<target name="Generate Parser" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+				<buildCommand>make</buildCommand>
+				<buildArguments>-j</buildArguments>
+				<buildTarget>../parser/eightPlusPlus.hxx</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>true</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+		</buildTargets>
 	</storageModule>
 </cproject>
