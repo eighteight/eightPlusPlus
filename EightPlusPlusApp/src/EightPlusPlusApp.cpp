@@ -9,7 +9,7 @@ void EightPlusPlusApp::setup() {
 		exit(0);
 	}
 
-	appFactory = AppFactory(getAppPath().string(),getArgs()[1]);
+	appFactory = AppFactory(getResourcePath().string(),getArgs()[1]);
 
 	currentShift = 0;
 	setupTracker();
