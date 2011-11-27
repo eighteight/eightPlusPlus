@@ -63,6 +63,13 @@ std::vector<ITrackerOp*> *Executable::getTrackerOps() const
     return trackerOps;
 }
 
+MediaOp *Executable::getMediaOp() const
+{
+    return mediaOp;
+}
+
+
+
 
 
 

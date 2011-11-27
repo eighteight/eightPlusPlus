@@ -24,6 +24,7 @@ public:
     void update();
     std::vector<MapperOp>* getMapperOps() const;
     std::vector<ITrackerOp*> *getTrackerOps() const;
+    MediaOp *getMediaOp() const;
 private:
 	MediaOp* mediaOp;
 	std::vector<MapperOp>* mapperOps;

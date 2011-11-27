@@ -30,8 +30,8 @@ void EightPlusPlusApp::setupTracker(){
 
 void EightPlusPlusApp::update() {
 	executable->update();
-	if (mediaOp->hasCurrentMovie()) {
-		mTexture = mediaOp->getCurrentMovie().getTexture();
+	if (executable->getMediaOp()->hasCurrentMovie()) {
+		mTexture = executable->getMediaOp()->getCurrentMovie().getTexture();
 	}
 	vector<ITrackerOp*>::iterator itr;
 	for (itr = executable->getTrackerOps()->begin(); itr != executable->getTrackerOps()->end(); ++itr)
@@ -46,7 +46,6 @@ void EightPlusPlusApp::resize( ResizeEvent event )
 
 void EightPlusPlusApp::keyDown( KeyEvent event )
 {
-
 	vector<ITrackerOp*>::iterator itr;
 	for (itr = executable->getTrackerOps()->begin(); itr != executable->getTrackerOps()->end(); ++itr)
 		(*itr)->keyDown(event);
@@ -64,10 +63,10 @@ void EightPlusPlusApp::keyDown( KeyEvent event )
 	switch(evCode)
 	{
 	case KeyEvent::KEY_a:
-		mediaOp->update(0);
+		executable->getMediaOp()->update(0);
 		break;
 	case KeyEvent::KEY_b:
-		mediaOp->update(1);
+		executable->getMediaOp()->update(1);
 		break;
 	case KeyEvent::KEY_ESCAPE:
 		quit();
@@ -79,7 +78,7 @@ void EightPlusPlusApp::keyDown( KeyEvent event )
 		try
 			{
 				uint currentVideoNum = lexical_cast<int>(evCode);
-				mediaOp->update(currentVideoNum);
+				executable->getMediaOp()->update(currentVideoNum);
 			}
 			catch(bad_lexical_cast &)
 			{
