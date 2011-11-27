@@ -9,41 +9,32 @@ void EightPlusPlusApp::setup() {
 		exit(0);
 	}
 
-	appFactory = AppFactory(getResourcePath().string(),getArgs()[1]);
-
+	executable  = (new AppFactory(getResourcePath().string(),getArgs()[1]))->createExecutable();
+    executable->setup();
 	currentShift = 0;
 	setupTracker();
 
 	gl::enableAlphaBlending();
 	gl::enableDepthRead();
 	gl::enableDepthWrite();
-
-	mediaOp.setMediaFilePaths(appFactory.mediaFilePaths);
-	mediaOp.load();
-
-	int tW = mediaOp.getCurrentMovie().getWidth();
-	int tH = mediaOp.getCurrentMovie().getHeight();
-
-	vector<MapperOp>::iterator mapr;
-		for(mapr= appFactory.mappers.begin();mapr !=appFactory.mappers.end();++mapr)
-			(*mapr).setTextureSize(tW, tH);
 }
 
 void EightPlusPlusApp::setupTracker(){
 
 	vector<ITrackerOp*>::iterator itr;
-	for (itr = appFactory.trackers.begin(); itr != appFactory.trackers.end(); ++itr) {
+	for (itr = executable->getTrackerOps()->begin(); itr !=  executable->getTrackerOps()->end(); ++itr) {
 		(*itr)->setup(&currentShift);
 		(*itr)->signalPositionUpdate.connect(bind(&PositionListener::updatePosition,&positionListener, boost::lambda::_1));
 	}
 }
 
 void EightPlusPlusApp::update() {
-	if (mediaOp.hasCurrentMovie()) {
-		mTexture = mediaOp.getCurrentMovie().getTexture();
+	executable->update();
+	if (mediaOp->hasCurrentMovie()) {
+		mTexture = mediaOp->getCurrentMovie().getTexture();
 	}
 	vector<ITrackerOp*>::iterator itr;
-	for (itr = appFactory.trackers.begin(); itr != appFactory.trackers.end(); ++itr)
+	for (itr = executable->getTrackerOps()->begin(); itr != executable->getTrackerOps()->end(); ++itr)
 		(*itr)->update(getElapsedSeconds());
 }
 
@@ -57,7 +48,7 @@ void EightPlusPlusApp::keyDown( KeyEvent event )
 {
 
 	vector<ITrackerOp*>::iterator itr;
-	for (itr = appFactory.trackers.begin(); itr != appFactory.trackers.end(); ++itr)
+	for (itr = executable->getTrackerOps()->begin(); itr != executable->getTrackerOps()->end(); ++itr)
 		(*itr)->keyDown(event);
 
 	switch( event.getCode() ) {
@@ -73,10 +64,10 @@ void EightPlusPlusApp::keyDown( KeyEvent event )
 	switch(evCode)
 	{
 	case KeyEvent::KEY_a:
-		mediaOp.update(0);
+		mediaOp->update(0);
 		break;
 	case KeyEvent::KEY_b:
-		mediaOp.update(1);
+		mediaOp->update(1);
 		break;
 	case KeyEvent::KEY_ESCAPE:
 		quit();
@@ -88,7 +79,7 @@ void EightPlusPlusApp::keyDown( KeyEvent event )
 		try
 			{
 				uint currentVideoNum = lexical_cast<int>(evCode);
-				mediaOp.update(currentVideoNum);
+				mediaOp->update(currentVideoNum);
 			}
 			catch(bad_lexical_cast &)
 			{
@@ -105,21 +96,21 @@ void EightPlusPlusApp::keyDown( KeyEvent event )
 void EightPlusPlusApp::mouseDown( MouseEvent event )
 {
 	vector<MapperOp>::iterator itr;
-	for (itr = appFactory.mappers.begin(); itr != appFactory.mappers.end(); ++itr)
+	for (itr = executable->getMapperOps()->begin(); itr != executable->getMapperOps()->end(); ++itr)
 		(*itr).mouseDown(event);
 }
 
 void EightPlusPlusApp::mouseDrag( MouseEvent event )
 {
 	vector<MapperOp>::iterator itr;
-	for (itr = appFactory.mappers.begin(); itr != appFactory.mappers.end(); ++itr)
+	for (itr = executable->getMapperOps()->begin(); itr != executable->getMapperOps()->end(); ++itr)
 		(*itr).mouseDrag(event);
 }
 
 void EightPlusPlusApp::mouseUp( MouseEvent event )
 {
 	vector<MapperOp>::iterator itr;
-	for (itr = appFactory.mappers.begin(); itr != appFactory.mappers.end(); ++itr)
+	for (itr = executable->getMapperOps()->begin(); itr != executable->getMapperOps()->end(); ++itr)
 		(*itr).mouseUp(event);
 }
 
@@ -132,7 +123,7 @@ void EightPlusPlusApp::draw()
 		gl::color(Color(1, 1, 1));
 
 		vector<MapperOp>::iterator mapper;
-		for (mapper = appFactory.mappers.begin(); mapper != appFactory.mappers.end(); ++mapper) {
+		for (mapper = executable->getMapperOps()->begin(); mapper != executable->getMapperOps()->end(); ++mapper) {
 			(*mapper).draw(mTexture, currentShift);
 		}
 
@@ -140,11 +131,11 @@ void EightPlusPlusApp::draw()
 	}
 
 	vector<MapperOp>::iterator mapprItr;
-	for (mapprItr = appFactory.mappers.begin(); mapprItr != appFactory.mappers.end(); ++mapprItr)
+	for (mapprItr = executable->getMapperOps()->begin(); mapprItr != executable->getMapperOps()->end(); ++mapprItr)
 		(*mapprItr).draw();
 
 	vector<ITrackerOp*>::iterator trackerItr;
-	for (trackerItr = appFactory.trackers.begin(); trackerItr != appFactory.trackers.end(); ++trackerItr)
+	for (trackerItr = executable->getTrackerOps()->begin(); trackerItr != executable->getTrackerOps()->end(); ++trackerItr)
 		(*trackerItr)->draw();
 
 }

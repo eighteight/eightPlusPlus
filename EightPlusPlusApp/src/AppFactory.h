@@ -11,11 +11,14 @@
 #include "cinder/Utilities.h"
 #include <boost/algorithm/string.hpp>
 #include "TrackerFactory.h"
+#include "Executable.h"
 #include <string>
 
 #include "eightPlusPlus.hxx"
 
 #include "MapperOp.h"
+#include "MediaOp.h"
+#include "TrackerFactory.h"
 
 using namespace cinder;
 
@@ -24,12 +27,16 @@ public:
 	AppFactory(){};
 	AppFactory(const string & appPath, const string &xmlFilePath);
 
+	Executable* createExecutable();
+
 	virtual ~AppFactory();
 
-	std::vector<string> mediaFilePaths;
+    auto_ptr<EightPlusPlusApp_t> eightPlusPlusApp;
 
-	std::vector<MapperOp> mappers;
-	std::vector<ITrackerOp*> trackers;
+private:
+	MediaOp* createMediaOp();
+	std::vector<MapperOp>* createMapperOps();
+	std::vector<ITrackerOp*>* createTrackerOps();
 };
 
 #endif /* XMLCONFIG_H_ */

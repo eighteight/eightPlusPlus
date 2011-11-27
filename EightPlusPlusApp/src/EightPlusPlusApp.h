@@ -48,9 +48,9 @@ class EightPlusPlusApp : public AppBasic {
 
 	gl::Texture	      mTexture;
 
-	MediaOp       mediaOp;
+	AppFactory* 		  appFactory;
 
-	AppFactory 		  appFactory;
+	Executable* executable;
 
 //	auto_ptr<EightPlusPlusApp_t> revolverApp;
 

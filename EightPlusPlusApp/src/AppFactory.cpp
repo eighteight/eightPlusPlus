@@ -10,52 +10,10 @@
 AppFactory::AppFactory(const string & resourcePath, const string &xmlFilePath) {
 	bool error = false;
 	try {
-
 		xml_schema::Properties props;
 		props.no_namespace_schema_location ("file://"+resourcePath+"/eightPlusPlus.xsd");
 		//props.schema_location ("http://www.w3.org/XML/1998/namespace", "xml.xsd");
-
-		auto_ptr<EightPlusPlusApp_t> revolverApp = parseEightPlusPlusApp(xmlFilePath, 0, props);
-		for (EightPlusPlusApp_t::MediaConstIterator medium(
-				revolverApp->getMedia().begin()); medium
-				!= revolverApp->getMedia().end(); ++medium) {
-			cout << " Media:" << (*medium).getPath() << " type: "<< (*medium).getType() << endl;
-			mediaFilePaths.push_back((*medium).getPath().get());
-		}
-
-		for (EightPlusPlusApp_t::MapperConstIterator mapper(
-				revolverApp->getMapper().begin()); mapper
-				!= revolverApp->getMapper().end(); ++mapper) {
-			cout << " Mapper: " << (*mapper).getName() << endl;
-
-			Linkable::LinkSequence links = (*mapper).getLink();
-
-			for (EightPlusPlusApp_t::LinkConstIterator linkIt(links.begin()); linkIt != links.end(); ++linkIt) {
-				cout<<"Link "<<(*linkIt).getSource()<<endl;
-			}
-
-			 int x = (*mapper).getX();
-			 int y = (*mapper).getY();
-			 int w = (*mapper).getW();
-			 int h = (*mapper).getH();
-
-			 float winX0 = (*mapper).getWinX0();
-			 float winX1 = (*mapper).getWinX1();
-
-			 MapperOp mOp = MapperOp(x, y, w, h, winX0, winX1);
-
-			for (EightPlusPlusApp_t::LinkConstIterator link(
-					(*mapper).getLink().begin()); link
-							!= (*mapper).getLink().end(); ++link){
-				//mOp.setMovie(link.getSource());
-			}
-			 mappers.push_back(mOp);
-		}
-
-		if (revolverApp->getTracker().present()) {
-			cout << " Tracker: " << revolverApp->getTracker().get().getType() << endl;
-			trackers.push_back(TrackerFactory::makeTracker(revolverApp->getTracker().get().getType().get()));
-		}
+		eightPlusPlusApp = parseEightPlusPlusApp(xmlFilePath, 0, props);
 	} catch (const xml_schema::Exception& e) {
 		cerr << e << endl;
 		error = true;
@@ -67,11 +25,89 @@ AppFactory::AppFactory(const string & resourcePath, const string &xmlFilePath) {
 }
 
 AppFactory::~AppFactory() {
-	if (!mediaFilePaths.empty()){
-		mediaFilePaths.clear();
+
+}
+
+Executable *AppFactory::createExecutable() {
+	Executable* executable = new Executable();
+
+	executable->setMediaOp(createMediaOp());
+	executable->setMapperOps(createMapperOps());
+	executable->setTrackerOps(createTrackerOps());
+
+	return executable;
+}
+
+MediaOp *AppFactory::createMediaOp() {
+	std::vector<string> mediaFilePaths;
+	for (EightPlusPlusApp_t::MediaConstIterator mediumItr(
+			eightPlusPlusApp->getMedia().begin()); mediumItr
+			!= eightPlusPlusApp->getMedia().end(); ++mediumItr) {
+		cout << " Media:" << (*mediumItr).getPath() << " type: "<< (*mediumItr).getType() << endl;
+		mediaFilePaths.push_back((*mediumItr).getPath().get());
+
+		Linkable::LinkSequence links = (*mediumItr).getLink();
+
+		for (EightPlusPlusApp_t::LinkConstIterator linkIt(links.begin()); linkIt != links.end(); ++linkIt) {
+			cout<<"Link "<<(*linkIt).getSource()<<endl;
+		}
 	}
 
-	if (!mappers.empty()){
-		mappers.clear();
-	}
+	MediaOp* mediaOp = new MediaOp();
+	mediaOp->setMediaFilePaths(mediaFilePaths);
+	return mediaOp;
 }
+
+std::vector<MapperOp> *AppFactory::createMapperOps()
+{
+	std::vector<MapperOp>* mappers = new std::vector<MapperOp>();
+	for (EightPlusPlusApp_t::MapperConstIterator mapperItr(
+			eightPlusPlusApp->getMapper().begin()); mapperItr
+			!= eightPlusPlusApp->getMapper().end(); ++mapperItr) {
+		cout << " Mapper: " << (*mapperItr).getName() << endl;
+
+		Linkable::LinkSequence links = (*mapperItr).getLink();
+
+		for (EightPlusPlusApp_t::LinkConstIterator linkIt(links.begin()); linkIt != links.end(); ++linkIt) {
+			cout<<"Link "<<(*linkIt).getSource()<<endl;
+		}
+
+		 int x = (*mapperItr).getX();
+		 int y = (*mapperItr).getY();
+		 int w = (*mapperItr).getW();
+		 int h = (*mapperItr).getH();
+
+		 float winX0 = (*mapperItr).getWinX0();
+		 float winX1 = (*mapperItr).getWinX1();
+
+		 mappers->push_back(MapperOp(x, y, w, h, winX0, winX1));
+	}
+
+	return mappers;
+
+}
+
+std::vector<ITrackerOp*> *AppFactory::createTrackerOps()
+{
+	std::vector<ITrackerOp*>* mappers = new std::vector<ITrackerOp*>();
+	std::vector<ITrackerOp*> trackers;
+	if (eightPlusPlusApp->getTracker().present()) {
+		cout << " Tracker: " << eightPlusPlusApp->getTracker().get().getType() << endl;
+		mappers->push_back(TrackerFactory::makeTracker(eightPlusPlusApp->getTracker().get().getType().get()));
+
+		Linkable::LinkSequence links = eightPlusPlusApp->getTracker().get().getLink();
+
+		for (EightPlusPlusApp_t::LinkConstIterator linkItr(links.begin()); linkItr != links.end(); ++linkItr) {
+			cout<<"TrackerLink "<<(*linkItr).getTarget()<<endl;
+		}
+	}
+	return mappers;
+}
+
+
+
+
+
+
+
+
