@@ -29,9 +29,10 @@ MapperOp::MapperOp(const int x, const int y, const int width, const int height, 
 }
 
 
-void MapperOp::setTextureSize(const int textureWidth, const int textureHeight){
-	this->textureWidth = textureWidth;
-	this->textureHeight = textureHeight;
+void MapperOp::setTexture(const Texture texture){
+	this->texture = texture;
+	this->textureWidth = texture.getWidth();
+	this->textureHeight = texture.getHeight();
 
 	mSource[0] = cv::Point2f( 0, 0 );
 	mSource[1] = cv::Point2f( textureWidth, 0 );
@@ -90,7 +91,7 @@ int MapperOp::findNearestPt( const Vec2f &aPt, int minDistance )
 	return result;
 }
 
-void MapperOp::draw(Texture texture, int shift){
+void MapperOp::draw(int shift){
 	gl::pushModelView();
 	gl::multModelView(mTransform);
 

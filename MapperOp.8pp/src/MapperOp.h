@@ -8,7 +8,7 @@
 #ifndef CROPPER_H_
 #define CROPPER_H_
 
-#define MOUSE_TOLERANCE 10
+#define MOUSE_TOLERANCE 5
 
 #include "cinder/Utilities.h"
 #include "cinder/app/MouseEvent.h"
@@ -33,10 +33,10 @@ public:
 
 	void mouseDrag( MouseEvent event );
 
-	void setTextureSize(const int width, const int height);
+	void setTexture(Texture mTexture);
 	void updateTransform();
 	void draw();
-	void draw(Texture mTexture, int shift);
+	void draw(int shift);
 
 private:
 	int findNearestPt( const Vec2f &aPt, int minDistance );
@@ -56,6 +56,7 @@ private:
 	int         textureHeight;
 	float       xCropFrom;
 	float       xCropTo;
+	Texture     texture;
 
 };
 

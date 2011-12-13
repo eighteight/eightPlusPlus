@@ -23,7 +23,7 @@ void MapperOpTest::setup()
 	int tH = APP_INITIAL_HEIGHT;
 
 	mapper = new MapperOp(10,10,100,200,0.2, 0.4);
-	mapper->setTextureSize(mTexture.getWidth(), mTexture.getHeight());
+	mapper->setTexture(mTexture);
 	currentShift = 0;
 }
 
@@ -74,7 +74,7 @@ void MapperOpTest::draw()
 	if (mTexture){
 		gl::color(Color(1, 1, 1));
 
-		mapper->draw(mTexture, currentShift);
+		mapper->draw(currentShift);
 
 		gl::color(Color(1, 1, 1));
 	}
