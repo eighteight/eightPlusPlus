@@ -11,24 +11,32 @@
 #include "MediaOp.h"
 #include "MapperOp.h"
 #include "TrackerFactory.h"
+#include "MediaLink.h"
+
+typedef boost::shared_ptr<MediaOp> MediaOpPtr;
+typedef boost::shared_ptr<MediaLink> MediaLinkPtr;
 
 class Executable {
 public:
 	Executable();
 	virtual ~Executable();
 
-    void setMediaOp(MediaOp *mediaOp);
-    void setMapperOps(std::vector<MapperOp>*);
+    void setMediaOp(MediaOpPtr mediaOp);
+    void setMapperOps(std::vector<MapperOpPtr>);
     void setTrackerOps(std::vector<ITrackerOp*>*);
     void setup();
     void update();
-    std::vector<MapperOp>* getMapperOps() const;
+    void draw(int);
+    std::vector<MapperOpPtr> getMapperOps() const;
     std::vector<ITrackerOp*> *getTrackerOps() const;
-    MediaOp *getMediaOp() const;
+    MediaOpPtr getMediaOp() const;
+    std::vector<MediaLinkPtr> getMediaLinks() const;
+    void setMediaLinks(std::vector<MediaLinkPtr> mediaLinks);
 private:
-	MediaOp* mediaOp;
-	std::vector<MapperOp>* mapperOps;
+    MediaOpPtr mediaOp;
+	std::vector<MapperOpPtr> mapperOps;
 	std::vector<ITrackerOp*>* trackerOps;
+	std::vector<MediaLinkPtr> mediaLinks;
 };
 
 #endif /* EXECUTABLE_H_ */

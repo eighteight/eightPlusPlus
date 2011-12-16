@@ -15,6 +15,7 @@
 #include <string>
 
 #include "eightPlusPlus.hxx"
+#include "schema-type.hxx"
 
 #include "MapperOp.h"
 #include "MediaOp.h"
@@ -34,9 +35,10 @@ public:
     auto_ptr<EightPlusPlusApp_t> eightPlusPlusApp;
 
 private:
-	MediaOp* createMediaOp();
-	std::vector<MapperOp>* createMapperOps();
+    MediaOpPtr createMediaOp();
+	std::vector<MapperOpPtr> createMapperOps();
 	std::vector<ITrackerOp*>* createTrackerOps();
+	std::vector<MediaLinkPtr> createMediaLinks(MediaOpPtr&, std::vector<MapperOpPtr>);
 };
 
 #endif /* XMLCONFIG_H_ */

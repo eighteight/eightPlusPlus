@@ -30,47 +30,65 @@ AppFactory::~AppFactory() {
 
 Executable *AppFactory::createExecutable() {
 	Executable* executable = new Executable();
+	MediaOpPtr mediaOp = createMediaOp();
+	executable->setMediaOp(mediaOp);
 
-	executable->setMediaOp(createMediaOp());
-	executable->setMapperOps(createMapperOps());
+	std::vector<MapperOpPtr> mapperOps = createMapperOps();
+	executable->setMapperOps(mapperOps);
 	executable->setTrackerOps(createTrackerOps());
+	executable->setMediaLinks(createMediaLinks(mediaOp, mapperOps));
 
 	return executable;
 }
 
-MediaOp *AppFactory::createMediaOp() {
+MediaOpPtr AppFactory::createMediaOp() {
 	std::vector<string> mediaFilePaths;
+	std::vector<MediaLink*> mediaLinks;
 	for (EightPlusPlusApp_t::MediaConstIterator mediumItr(
 			eightPlusPlusApp->getMedia().begin()); mediumItr
 			!= eightPlusPlusApp->getMedia().end(); ++mediumItr) {
-		cout << " Media:" << (*mediumItr).getPath() << " type: "<< (*mediumItr).getType() << endl;
-		mediaFilePaths.push_back((*mediumItr).getPath().get());
+		cout << " Media:" << (*mediumItr).getPath() << " type: "<< (*mediumItr).getType() <<endl;
 
-		Linkable::LinkSequence links = (*mediumItr).getLink();
+		mediaFilePaths.push_back((*mediumItr).getPath().get());
+	}
+
+	MediaOpPtr mediaOpPtr(new MediaOp());
+	mediaOpPtr.get()->setMediaFilePaths(mediaFilePaths);
+	return mediaOpPtr;
+}
+
+std::vector<MediaLinkPtr> AppFactory::createMediaLinks(MediaOpPtr& mediaOp, std::vector<MapperOpPtr> mapperOps) {
+	std::vector<MediaLinkPtr> mediaLinks;
+	for (EightPlusPlusApp_t::MediaConstIterator mdmItr(
+			eightPlusPlusApp->getMedia().begin()); mdmItr
+			!= eightPlusPlusApp->getMedia().end(); ++mdmItr) {
+		cout << " Media:" << (*mdmItr).getPath() << " type: "<< (*mdmItr).getType() <<endl;
+
+		Linkable::LinkSequence links = (*mdmItr).getLink();
 
 		for (EightPlusPlusApp_t::LinkConstIterator linkIt(links.begin()); linkIt != links.end(); ++linkIt) {
-			cout<<"Link "<<(*linkIt).getSource()<<endl;
+			cout<<"Media Link "<<(*linkIt).getSource()<< ": "<<(*linkIt).getTarget()<<endl;
+			string str=(*linkIt).getTarget();
+			size_t pos = str.find("@mapper.")+8;
+			string indStr = str.substr (pos);
+
+			int numb;
+			istringstream ( indStr ) >> numb;
+
+			mediaLinks.push_back(MediaLinkPtr(new MediaLink(mediaOp, mapperOps.at(numb))));
 		}
 	}
 
-	MediaOp* mediaOp = new MediaOp();
-	mediaOp->setMediaFilePaths(mediaFilePaths);
-	return mediaOp;
+	return mediaLinks;
 }
 
-std::vector<MapperOp> *AppFactory::createMapperOps()
+std::vector<MapperOpPtr> AppFactory::createMapperOps()
 {
-	std::vector<MapperOp>* mappers = new std::vector<MapperOp>();
+	std::vector<MapperOpPtr> mappers;
 	for (EightPlusPlusApp_t::MapperConstIterator mapperItr(
 			eightPlusPlusApp->getMapper().begin()); mapperItr
 			!= eightPlusPlusApp->getMapper().end(); ++mapperItr) {
 		cout << " Mapper: " << (*mapperItr).getName() << endl;
-
-		Linkable::LinkSequence links = (*mapperItr).getLink();
-
-		for (EightPlusPlusApp_t::LinkConstIterator linkIt(links.begin()); linkIt != links.end(); ++linkIt) {
-			cout<<"Link "<<(*linkIt).getSource()<<endl;
-		}
 
 		 int x = (*mapperItr).getX();
 		 int y = (*mapperItr).getY();
@@ -80,7 +98,7 @@ std::vector<MapperOp> *AppFactory::createMapperOps()
 		 float winX0 = (*mapperItr).getWinX0();
 		 float winX1 = (*mapperItr).getWinX1();
 
-		 mappers->push_back(MapperOp(x, y, w, h, winX0, winX1));
+		 mappers.push_back(MapperOpPtr(new MapperOp(x, y, w, h, winX0, winX1)));
 	}
 
 	return mappers;
@@ -94,12 +112,6 @@ std::vector<ITrackerOp*> *AppFactory::createTrackerOps()
 	if (eightPlusPlusApp->getTracker().present()) {
 		cout << " Tracker: " << eightPlusPlusApp->getTracker().get().getType() << endl;
 		mappers->push_back(TrackerFactory::makeTracker(eightPlusPlusApp->getTracker().get().getType().get()));
-
-		Linkable::LinkSequence links = eightPlusPlusApp->getTracker().get().getLink();
-
-		for (EightPlusPlusApp_t::LinkConstIterator linkItr(links.begin()); linkItr != links.end(); ++linkItr) {
-			cout<<"TrackerLink "<<(*linkItr).getTarget()<<endl;
-		}
 	}
 	return mappers;
 }

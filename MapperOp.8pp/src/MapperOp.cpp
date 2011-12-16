@@ -6,6 +6,9 @@
  */
 
 #include "MapperOp.h"
+using namespace cinder;
+using namespace cinder::app;
+using namespace gl;
 
 MapperOp::MapperOp(){
 	MapperOp(0,0,100,200,0.2, 0.4);
@@ -29,10 +32,11 @@ MapperOp::MapperOp(const int x, const int y, const int width, const int height, 
 }
 
 
-void MapperOp::setTexture(const Texture texture){
+void MapperOp::setTexture(Texture texture){
+	if (!texture) return;
 	this->texture = texture;
-	this->textureWidth = texture.getWidth();
-	this->textureHeight = texture.getHeight();
+	this->textureWidth = this->texture.getWidth();
+	this->textureHeight = this->texture.getHeight();
 
 	mSource[0] = cv::Point2f( 0, 0 );
 	mSource[1] = cv::Point2f( textureWidth, 0 );
@@ -92,6 +96,8 @@ int MapperOp::findNearestPt( const Vec2f &aPt, int minDistance )
 }
 
 void MapperOp::draw(int shift){
+	if (!texture) return;
+	gl::color(Color(1, 1, 1));
 	gl::pushModelView();
 	gl::multModelView(mTransform);
 
@@ -100,6 +106,7 @@ void MapperOp::draw(int shift){
 	texture.unbind();
 
 	gl::popModelView();
+	gl::color(Color(1, 1, 1));
 }
 
 void MapperOp::drawTexturedRect( const Rectf &srcRect,  const Rectf &destRec){
@@ -131,14 +138,14 @@ void MapperOp::draw(){
 	for( int i = 0; i < 4; ++i )
 	gl::drawSolidCircle( mPoints[i], 4.0f );
 	gl::draw(polyline);
-
 }
 
 void MapperOp::updateTransform()
 {
 
-	for( int i = 0; i < 4; ++i )
+	for( int i = 0; i < 4; ++i ) {
 		mDestination[i] = toOcv( mPoints[i] );
+	}
 
 	cv::Mat warpMatrix = cv::getPerspectiveTransform( mSource, mDestination );
 
@@ -155,5 +162,4 @@ void MapperOp::updateTransform()
 	mTransform[3]	= warpMatrix.ptr<double>(2)[0];
 	mTransform[7]	= warpMatrix.ptr<double>(2)[1];
 	mTransform[15]	= warpMatrix.ptr<double>(2)[2];
-
 }

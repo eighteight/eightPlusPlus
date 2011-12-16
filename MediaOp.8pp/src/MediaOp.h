@@ -39,6 +39,7 @@ public:
 
 	void setup();
 	void update(uint videoNum);
+	void update();
 	void draw();
 	qtime::MovieGl getCurrentMovie(void);
 
@@ -49,6 +50,7 @@ public:
 
 	ci::Area	getBounds();
 	ci::Vec2i	getSize();
+    gl::Texture getTexture() const;
 protected:
 	std::vector<qtime::MovieGl>		movies;
 	std::vector<std::string> mediaFilePaths;

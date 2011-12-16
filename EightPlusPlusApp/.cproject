@@ -242,7 +242,7 @@
 						</toolChain>
 					</folderInfo>
 					<fileInfo id="cdt.managedbuild.toolchain.gnu.macosx.base.1873825215.1942516176" name="eightPlusPlus.xsd" rcbsApplicability="override" resourcePath="parser/eightPlusPlus.xsd" toolsToInvoke="org.eclipse.cdt.managedbuilder.ui.rcbs.1148304447">
-						<tool announcement="Compile eightPlusPlus.xsd" command="/opt/xsd/bin/xsd cxx-tree --type-naming java --function-naming java --generate-inline --output-dir ../parser ../parser/eightPlusPlus.xsd" customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.1148304447" name="Resource Custom Build Step">
+						<tool announcement="Compile eightPlusPlus.xsd" command="/opt/xsd/bin/xsd cxx-tree --type-naming java --function-naming java --generate-serialization --generate-polymorphic --generate-inline --output-dir ../parser ../parser/eightPlusPlus.xsd" customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.1148304447" name="Resource Custom Build Step">
 							<inputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.inputtype.1863118312" name="Resource Custom Build Step Input Type">
 								<additionalInput kind="additionalinputdependency" paths=""/>
 							</inputType>

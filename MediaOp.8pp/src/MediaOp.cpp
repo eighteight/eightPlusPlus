@@ -50,7 +50,7 @@ void MediaOp::update(uint videoNumber)
 		if (currentMovieNumber != videoNumber){
 			console() << "video number "<<videoNumber << endl;
 		}
-		currentMovieNumber = videoNumber;
+		currentMovieNumber = 0;//videoNumber;
 	}
 }
 
@@ -106,6 +106,7 @@ Vec2i MediaOp::getSize()
 }
 
 bool MediaOp::hasCurrentMovie(){
+	currentMovieNumber = 0;
 	return !movies.empty() &&  currentMovieNumber<  movies.size();
 }
 
@@ -166,3 +167,19 @@ void MediaOp::threadLoad(const string &url)
 	console() << getElapsedSeconds() << ":" << "Added file " << url << " "<< movies.size()<<endl;
 	moviesMutex.unlock();
 }
+
+gl::Texture MediaOp::getTexture() const
+{
+    return mTexture;
+}
+
+void MediaOp::update()
+{
+	if (hasCurrentMovie()){
+		mTexture = getCurrentMovie().getTexture();
+	}
+}
+
+
+
+

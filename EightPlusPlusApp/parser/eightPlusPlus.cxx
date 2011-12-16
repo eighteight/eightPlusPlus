@@ -42,6 +42,15 @@
 
 #include <xsd/cxx/xml/dom/parsing-source.hxx>
 
+#include <xsd/cxx/tree/type-factory-map.hxx>
+
+namespace _xsd
+{
+  static
+  const ::xsd::cxx::tree::type_factory_plate< 0, char >
+  type_factory_plate_init;
+}
+
 // EightPlusPlusApp_t
 //
 
@@ -1115,6 +1124,478 @@ parseEightPlusPlusApp (::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument >& d,
     n.namespace_ (),
     "eightPlusPlusApp",
     "");
+}
+
+#include <ostream>
+#include <xsd/cxx/tree/error-handler.hxx>
+#include <xsd/cxx/xml/dom/serialization-source.hxx>
+
+#include <xsd/cxx/tree/type-serializer-map.hxx>
+
+namespace _xsd
+{
+  static
+  const ::xsd::cxx::tree::type_serializer_plate< 0, char >
+  type_serializer_plate_init;
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const EightPlusPlusApp_t& i)
+{
+  e << static_cast< const ::xml_schema::Type& > (i);
+
+  // mapper
+  //
+  for (EightPlusPlusApp_t::MapperConstIterator
+       b (i.getMapper ().begin ()), n (i.getMapper ().end ());
+       b != n; ++b)
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "mapper",
+        e));
+
+    s << *b;
+  }
+
+  // tracker
+  //
+  if (i.getTracker ())
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "tracker",
+        e));
+
+    s << *i.getTracker ();
+  }
+
+  // media
+  //
+  for (EightPlusPlusApp_t::MediaConstIterator
+       b (i.getMedia ().begin ()), n (i.getMedia ().end ());
+       b != n; ++b)
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "media",
+        e));
+
+    s << *b;
+  }
+
+  // link
+  //
+  for (EightPlusPlusApp_t::LinkConstIterator
+       b (i.getLink ().begin ()), n (i.getLink ().end ());
+       b != n; ++b)
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "link",
+        e));
+
+    s << *b;
+  }
+}
+
+void
+serializeEightPlusPlusApp (::std::ostream& o,
+                           const ::EightPlusPlusApp_t& s,
+                           const ::xml_schema::NamespaceInfomap& m,
+                           const ::std::string& e,
+                           ::xml_schema::Flags f)
+{
+  ::xsd::cxx::xml::auto_initializer i (
+    (f & ::xml_schema::Flags::dont_initialize) == 0);
+
+  ::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d (
+    ::serializeEightPlusPlusApp (s, m, f));
+
+  ::xsd::cxx::tree::error_handler< char > h;
+
+  ::xsd::cxx::xml::dom::ostream_format_target t (o);
+  if (!::xsd::cxx::xml::dom::serialize (t, *d, e, h, f))
+  {
+    h.throw_if_failed< ::xsd::cxx::tree::serialization< char > > ();
+  }
+}
+
+void
+serializeEightPlusPlusApp (::std::ostream& o,
+                           const ::EightPlusPlusApp_t& s,
+                           ::xml_schema::ErrorHandler& h,
+                           const ::xml_schema::NamespaceInfomap& m,
+                           const ::std::string& e,
+                           ::xml_schema::Flags f)
+{
+  ::xsd::cxx::xml::auto_initializer i (
+    (f & ::xml_schema::Flags::dont_initialize) == 0);
+
+  ::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d (
+    ::serializeEightPlusPlusApp (s, m, f));
+  ::xsd::cxx::xml::dom::ostream_format_target t (o);
+  if (!::xsd::cxx::xml::dom::serialize (t, *d, e, h, f))
+  {
+    throw ::xsd::cxx::tree::serialization< char > ();
+  }
+}
+
+void
+serializeEightPlusPlusApp (::std::ostream& o,
+                           const ::EightPlusPlusApp_t& s,
+                           ::xercesc::DOMErrorHandler& h,
+                           const ::xml_schema::NamespaceInfomap& m,
+                           const ::std::string& e,
+                           ::xml_schema::Flags f)
+{
+  ::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d (
+    ::serializeEightPlusPlusApp (s, m, f));
+  ::xsd::cxx::xml::dom::ostream_format_target t (o);
+  if (!::xsd::cxx::xml::dom::serialize (t, *d, e, h, f))
+  {
+    throw ::xsd::cxx::tree::serialization< char > ();
+  }
+}
+
+void
+serializeEightPlusPlusApp (::xercesc::XMLFormatTarget& t,
+                           const ::EightPlusPlusApp_t& s,
+                           const ::xml_schema::NamespaceInfomap& m,
+                           const ::std::string& e,
+                           ::xml_schema::Flags f)
+{
+  ::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d (
+    ::serializeEightPlusPlusApp (s, m, f));
+
+  ::xsd::cxx::tree::error_handler< char > h;
+
+  if (!::xsd::cxx::xml::dom::serialize (t, *d, e, h, f))
+  {
+    h.throw_if_failed< ::xsd::cxx::tree::serialization< char > > ();
+  }
+}
+
+void
+serializeEightPlusPlusApp (::xercesc::XMLFormatTarget& t,
+                           const ::EightPlusPlusApp_t& s,
+                           ::xml_schema::ErrorHandler& h,
+                           const ::xml_schema::NamespaceInfomap& m,
+                           const ::std::string& e,
+                           ::xml_schema::Flags f)
+{
+  ::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d (
+    ::serializeEightPlusPlusApp (s, m, f));
+  if (!::xsd::cxx::xml::dom::serialize (t, *d, e, h, f))
+  {
+    throw ::xsd::cxx::tree::serialization< char > ();
+  }
+}
+
+void
+serializeEightPlusPlusApp (::xercesc::XMLFormatTarget& t,
+                           const ::EightPlusPlusApp_t& s,
+                           ::xercesc::DOMErrorHandler& h,
+                           const ::xml_schema::NamespaceInfomap& m,
+                           const ::std::string& e,
+                           ::xml_schema::Flags f)
+{
+  ::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d (
+    ::serializeEightPlusPlusApp (s, m, f));
+  if (!::xsd::cxx::xml::dom::serialize (t, *d, e, h, f))
+  {
+    throw ::xsd::cxx::tree::serialization< char > ();
+  }
+}
+
+void
+serializeEightPlusPlusApp (::xercesc::DOMDocument& d,
+                           const ::EightPlusPlusApp_t& s,
+                           ::xml_schema::Flags)
+{
+  ::xercesc::DOMElement& e (*d.getDocumentElement ());
+  const ::xsd::cxx::xml::qualified_name< char > n (
+    ::xsd::cxx::xml::dom::name< char > (e));
+
+  if (n.name () == "eightPlusPlusApp" &&
+      n.namespace_ () == "")
+  {
+    e << s;
+  }
+  else
+  {
+    throw ::xsd::cxx::tree::unexpected_element < char > (
+      n.name (),
+      n.namespace_ (),
+      "eightPlusPlusApp",
+      "");
+  }
+}
+
+::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument >
+serializeEightPlusPlusApp (const ::EightPlusPlusApp_t& s,
+                           const ::xml_schema::NamespaceInfomap& m,
+                           ::xml_schema::Flags f)
+{
+  ::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d (
+    ::xsd::cxx::xml::dom::serialize< char > (
+      "eightPlusPlusApp",
+      "",
+      m, f));
+
+  ::serializeEightPlusPlusApp (*d, s, f);
+  return d;
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const Linkable& i)
+{
+  e << static_cast< const ::xml_schema::Type& > (i);
+
+  // Link
+  //
+  for (Linkable::LinkConstIterator
+       b (i.getLink ().begin ()), n (i.getLink ().end ());
+       b != n; ++b)
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "Link",
+        e));
+
+    s << *b;
+  }
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const Medium& i)
+{
+  e << static_cast< const ::Linkable& > (i);
+
+  // path
+  //
+  if (i.getPath ())
+  {
+    ::xercesc::DOMAttr& a (
+      ::xsd::cxx::xml::dom::create_attribute (
+        "path",
+        e));
+
+    a << *i.getPath ();
+  }
+
+  // type
+  //
+  if (i.getType ())
+  {
+    ::xercesc::DOMAttr& a (
+      ::xsd::cxx::xml::dom::create_attribute (
+        "type",
+        e));
+
+    a << *i.getType ();
+  }
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const Tracker& i)
+{
+  e << static_cast< const ::Linkable& > (i);
+
+  // name
+  //
+  if (i.getName ())
+  {
+    ::xercesc::DOMAttr& a (
+      ::xsd::cxx::xml::dom::create_attribute (
+        "name",
+        e));
+
+    a << *i.getName ();
+  }
+
+  // type
+  //
+  if (i.getType ())
+  {
+    ::xercesc::DOMAttr& a (
+      ::xsd::cxx::xml::dom::create_attribute (
+        "type",
+        e));
+
+    a << *i.getType ();
+  }
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const Mapper& i)
+{
+  e << static_cast< const ::Linkable& > (i);
+
+  // name
+  //
+  {
+    ::xercesc::DOMAttr& a (
+      ::xsd::cxx::xml::dom::create_attribute (
+        "name",
+        e));
+
+    a << i.getName ();
+  }
+
+  // x
+  //
+  {
+    ::xercesc::DOMAttr& a (
+      ::xsd::cxx::xml::dom::create_attribute (
+        "x",
+        e));
+
+    a << i.getX ();
+  }
+
+  // y
+  //
+  {
+    ::xercesc::DOMAttr& a (
+      ::xsd::cxx::xml::dom::create_attribute (
+        "y",
+        e));
+
+    a << i.getY ();
+  }
+
+  // w
+  //
+  {
+    ::xercesc::DOMAttr& a (
+      ::xsd::cxx::xml::dom::create_attribute (
+        "w",
+        e));
+
+    a << i.getW ();
+  }
+
+  // h
+  //
+  {
+    ::xercesc::DOMAttr& a (
+      ::xsd::cxx::xml::dom::create_attribute (
+        "h",
+        e));
+
+    a << i.getH ();
+  }
+
+  // winX0
+  //
+  {
+    ::xercesc::DOMAttr& a (
+      ::xsd::cxx::xml::dom::create_attribute (
+        "winX0",
+        e));
+
+    a << i.getWinX0 ();
+  }
+
+  // winY0
+  //
+  {
+    ::xercesc::DOMAttr& a (
+      ::xsd::cxx::xml::dom::create_attribute (
+        "winY0",
+        e));
+
+    a << i.getWinY0 ();
+  }
+
+  // winX1
+  //
+  {
+    ::xercesc::DOMAttr& a (
+      ::xsd::cxx::xml::dom::create_attribute (
+        "winX1",
+        e));
+
+    a << i.getWinX1 ();
+  }
+
+  // winY1
+  //
+  {
+    ::xercesc::DOMAttr& a (
+      ::xsd::cxx::xml::dom::create_attribute (
+        "winY1",
+        e));
+
+    a << i.getWinY1 ();
+  }
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const TrackerTypeDict& i)
+{
+  e << static_cast< const ::xml_schema::String& > (i);
+}
+
+void
+operator<< (::xercesc::DOMAttr& a, const TrackerTypeDict& i)
+{
+  a << static_cast< const ::xml_schema::String& > (i);
+}
+
+void
+operator<< (::xml_schema::ListStream& l,
+            const TrackerTypeDict& i)
+{
+  l << static_cast< const ::xml_schema::String& > (i);
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const MediumTypeDict& i)
+{
+  e << static_cast< const ::xml_schema::String& > (i);
+}
+
+void
+operator<< (::xercesc::DOMAttr& a, const MediumTypeDict& i)
+{
+  a << static_cast< const ::xml_schema::String& > (i);
+}
+
+void
+operator<< (::xml_schema::ListStream& l,
+            const MediumTypeDict& i)
+{
+  l << static_cast< const ::xml_schema::String& > (i);
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const Link& i)
+{
+  e << static_cast< const ::xml_schema::Type& > (i);
+
+  // Source
+  //
+  {
+    ::xercesc::DOMAttr& a (
+      ::xsd::cxx::xml::dom::create_attribute (
+        "Source",
+        e));
+
+    a << i.getSource ();
+  }
+
+  // Target
+  //
+  {
+    ::xercesc::DOMAttr& a (
+      ::xsd::cxx::xml::dom::create_attribute (
+        "Target",
+        e));
+
+    a << i.getTarget ();
+  }
 }
 
 #include <xsd/cxx/post.hxx>

@@ -18,9 +18,6 @@
 #include "cinder/app/App.h"
 #include "CinderOpenCV.h"
 
-using namespace cinder;
-using namespace cinder::app;
-using namespace cinder::gl;
 class MapperOp {
 public:
 	MapperOp();
@@ -28,35 +25,35 @@ public:
 	MapperOp(const int x, const int y, const int width, const int height,  const float xCropFro, const float xCropT);
 	virtual ~MapperOp();
 
-	void mouseDown( MouseEvent event );
-	void mouseUp( MouseEvent event );
+	void mouseDown(cinder::app::MouseEvent event );
+	void mouseUp(cinder::app::MouseEvent event );
 
-	void mouseDrag( MouseEvent event );
+	void mouseDrag(cinder::app::MouseEvent event );
 
-	void setTexture(Texture mTexture);
+	void setTexture(cinder::gl::Texture);
 	void updateTransform();
 	void draw();
 	void draw(int shift);
 
 private:
-	int findNearestPt( const Vec2f &aPt, int minDistance );
-	void drawTexturedRect( const Rectf &srcRect,  const Rectf &destRec);
+	int findNearestPt( const cinder::Vec2f &aPt, int minDistance );
+	void drawTexturedRect( const cinder::Rectf &srcRect,  const cinder::Rectf &destRec);
 
-	Rectf getSourceRect();
-	Rectf getDestinationRect(int currentShift);
+	cinder::Rectf getSourceRect();
+	cinder::Rectf getDestinationRect(int currentShift);
 
 	cv::Point2f	mSource[4];
 	cv::Point2f	mDestination[4];
-	Matrix44d	mTransform;
+	cinder::Matrix44d	mTransform;
 
-	PolyLine<Vec2f>	polyline;
-	Vec2f				mPoints[4];
+	cinder::PolyLine<cinder::Vec2f>	polyline;
+	cinder::Vec2f				mPoints[4];
 	int					mTrackedPoint;
 	int         textureWidth;
 	int         textureHeight;
 	float       xCropFrom;
 	float       xCropTo;
-	Texture     texture;
+	cinder::gl::Texture     texture;
 
 };
 

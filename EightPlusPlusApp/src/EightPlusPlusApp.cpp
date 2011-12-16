@@ -9,7 +9,7 @@ void EightPlusPlusApp::setup() {
 		exit(0);
 	}
 
-	executable  = (new AppFactory(getResourcePath().string(),getArgs()[1]))->createExecutable();
+	executable = (new AppFactory(getResourcePath().string(),getArgs()[1]))->createExecutable();
     executable->setup();
 	currentShift = 0;
 	setupTracker();
@@ -31,11 +31,20 @@ void EightPlusPlusApp::setupTracker(){
 void EightPlusPlusApp::update() {
 	executable->update();
 	if (executable->getMediaOp()->hasCurrentMovie()) {
-		mTexture = executable->getMediaOp()->getCurrentMovie().getTexture();
+		mTexture = executable->getMediaOp()->getTexture();
 	}
 	vector<ITrackerOp*>::iterator itr;
 	for (itr = executable->getTrackerOps()->begin(); itr != executable->getTrackerOps()->end(); ++itr)
 		(*itr)->update(getElapsedSeconds());
+
+	if (mTexture) {
+		vector<MapperOpPtr>::iterator m;
+		for (m = executable->getMapperOps().begin();
+				m != executable->getMapperOps().end(); ++m) {
+			//cout << "xx " << &mTexture << endl;
+			//(*m).setTexture(mTexture);
+		}
+	}
 }
 
 
@@ -94,23 +103,23 @@ void EightPlusPlusApp::keyDown( KeyEvent event )
 
 void EightPlusPlusApp::mouseDown( MouseEvent event )
 {
-	vector<MapperOp>::iterator itr;
-	for (itr = executable->getMapperOps()->begin(); itr != executable->getMapperOps()->end(); ++itr)
-		(*itr).mouseDown(event);
+	vector<MapperOpPtr>::iterator itr;
+	for (itr = executable->getMapperOps().begin(); itr != executable->getMapperOps().end(); ++itr)
+		(*itr).get()->mouseDown(event);
 }
 
 void EightPlusPlusApp::mouseDrag( MouseEvent event )
 {
-	vector<MapperOp>::iterator itr;
-	for (itr = executable->getMapperOps()->begin(); itr != executable->getMapperOps()->end(); ++itr)
-		(*itr).mouseDrag(event);
+	vector<MapperOpPtr>::iterator itr;
+	for (itr = executable->getMapperOps().begin(); itr != executable->getMapperOps().end(); ++itr)
+		(*itr).get()->mouseDrag(event);
 }
 
 void EightPlusPlusApp::mouseUp( MouseEvent event )
 {
-	vector<MapperOp>::iterator itr;
-	for (itr = executable->getMapperOps()->begin(); itr != executable->getMapperOps()->end(); ++itr)
-		(*itr).mouseUp(event);
+	vector<MapperOpPtr>::iterator itr;
+	for (itr = executable->getMapperOps().begin(); itr != executable->getMapperOps().end(); ++itr)
+		(*itr).get()->mouseUp(event);
 }
 
 void EightPlusPlusApp::draw()
@@ -118,25 +127,7 @@ void EightPlusPlusApp::draw()
 	gl::setMatricesWindow(getWindowSize());
 	glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-	if (mTexture){
-		gl::color(Color(1, 1, 1));
-
-		vector<MapperOp>::iterator mapper;
-		for (mapper = executable->getMapperOps()->begin(); mapper != executable->getMapperOps()->end(); ++mapper) {
-			(*mapper).draw(mTexture, currentShift);
-		}
-
-		gl::color(Color(1, 1, 1));
-	}
-
-	vector<MapperOp>::iterator mapprItr;
-	for (mapprItr = executable->getMapperOps()->begin(); mapprItr != executable->getMapperOps()->end(); ++mapprItr)
-		(*mapprItr).draw();
-
-	vector<ITrackerOp*>::iterator trackerItr;
-	for (trackerItr = executable->getTrackerOps()->begin(); trackerItr != executable->getTrackerOps()->end(); ++trackerItr)
-		(*trackerItr)->draw();
-
+	executable->draw(currentShift);
 }
 
 void EightPlusPlusApp::prepareSettings( Settings* settings )

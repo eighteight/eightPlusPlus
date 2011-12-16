@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<eightPlusPlusApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="../parser/eightPlusPlus.xsd">
+<eightPlusPlusApp>
 
   <mapper name="MapperLeft" x="10" y="30" w="95" h="240" winX0="0" winY0="0" winX1="0.33" winY1="1"/>
   

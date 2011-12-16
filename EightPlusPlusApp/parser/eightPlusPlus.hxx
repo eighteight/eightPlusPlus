@@ -79,6 +79,21 @@
 #include <xsd/cxx/tree/parsing/double.hxx>
 #include <xsd/cxx/tree/parsing/decimal.hxx>
 
+#include <xsd/cxx/xml/dom/serialization-header.hxx>
+#include <xsd/cxx/tree/serialization.hxx>
+#include <xsd/cxx/tree/serialization/byte.hxx>
+#include <xsd/cxx/tree/serialization/unsigned-byte.hxx>
+#include <xsd/cxx/tree/serialization/short.hxx>
+#include <xsd/cxx/tree/serialization/unsigned-short.hxx>
+#include <xsd/cxx/tree/serialization/int.hxx>
+#include <xsd/cxx/tree/serialization/unsigned-int.hxx>
+#include <xsd/cxx/tree/serialization/long.hxx>
+#include <xsd/cxx/tree/serialization/unsigned-long.hxx>
+#include <xsd/cxx/tree/serialization/boolean.hxx>
+#include <xsd/cxx/tree/serialization/float.hxx>
+#include <xsd/cxx/tree/serialization/double.hxx>
+#include <xsd/cxx/tree/serialization/decimal.hxx>
+
 namespace xml_schema
 {
   // anyType and anySimpleType.
@@ -174,6 +189,16 @@ namespace xml_schema
   typedef ::xsd::cxx::tree::entity< char, Ncname > Entity;
   typedef ::xsd::cxx::tree::entities< char, SimpleType, Entity > Entities;
 
+  // Namespace information and list stream. Used in
+  // serialization functions.
+  //
+  typedef ::xsd::cxx::xml::dom::namespace_info< char > NamespaceInfo;
+  typedef ::xsd::cxx::xml::dom::namespace_infomap< char > NamespaceInfomap;
+  typedef ::xsd::cxx::tree::list_stream< char > ListStream;
+  typedef ::xsd::cxx::tree::as_double< Double > AsDouble;
+  typedef ::xsd::cxx::tree::as_decimal< Decimal > AsDecimal;
+  typedef ::xsd::cxx::tree::facet Facet;
+
   // Flags and properties.
   //
   typedef ::xsd::cxx::tree::flags Flags;
@@ -197,6 +222,9 @@ namespace xml_schema
   typedef ::xsd::cxx::tree::unexpected_enumerator< char > UnexpectedEnumerator;
   typedef ::xsd::cxx::tree::expected_text_content< char > ExpectedTextContent;
   typedef ::xsd::cxx::tree::no_prefix_mapping< char > NoPrefixMapping;
+  typedef ::xsd::cxx::tree::no_type_info< char > NoTypeInfo;
+  typedef ::xsd::cxx::tree::not_derived< char > NotDerived;
+  typedef ::xsd::cxx::tree::serialization< char > Serialization;
 
   // Error handler callback interface.
   //
@@ -1023,6 +1051,120 @@ parseEightPlusPlusApp (const ::xercesc::DOMDocument& d,
 parseEightPlusPlusApp (::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument >& d,
                        ::xml_schema::Flags f = 0,
                        const ::xml_schema::Properties& p = ::xml_schema::Properties ());
+
+#include <iosfwd>
+
+#include <xercesc/dom/DOMDocument.hpp>
+#include <xercesc/dom/DOMErrorHandler.hpp>
+#include <xercesc/framework/XMLFormatter.hpp>
+
+#include <xsd/cxx/xml/dom/auto-ptr.hxx>
+
+void
+operator<< (::xercesc::DOMElement&, const EightPlusPlusApp_t&);
+
+// Serialize to std::ostream.
+//
+
+void
+serializeEightPlusPlusApp (::std::ostream& os,
+                           const ::EightPlusPlusApp_t& x, 
+                           const ::xml_schema::NamespaceInfomap& m = ::xml_schema::NamespaceInfomap (),
+                           const ::std::string& e = "UTF-8",
+                           ::xml_schema::Flags f = 0);
+
+void
+serializeEightPlusPlusApp (::std::ostream& os,
+                           const ::EightPlusPlusApp_t& x, 
+                           ::xml_schema::ErrorHandler& eh,
+                           const ::xml_schema::NamespaceInfomap& m = ::xml_schema::NamespaceInfomap (),
+                           const ::std::string& e = "UTF-8",
+                           ::xml_schema::Flags f = 0);
+
+void
+serializeEightPlusPlusApp (::std::ostream& os,
+                           const ::EightPlusPlusApp_t& x, 
+                           ::xercesc::DOMErrorHandler& eh,
+                           const ::xml_schema::NamespaceInfomap& m = ::xml_schema::NamespaceInfomap (),
+                           const ::std::string& e = "UTF-8",
+                           ::xml_schema::Flags f = 0);
+
+// Serialize to xercesc::XMLFormatTarget.
+//
+
+void
+serializeEightPlusPlusApp (::xercesc::XMLFormatTarget& ft,
+                           const ::EightPlusPlusApp_t& x, 
+                           const ::xml_schema::NamespaceInfomap& m = ::xml_schema::NamespaceInfomap (),
+                           const ::std::string& e = "UTF-8",
+                           ::xml_schema::Flags f = 0);
+
+void
+serializeEightPlusPlusApp (::xercesc::XMLFormatTarget& ft,
+                           const ::EightPlusPlusApp_t& x, 
+                           ::xml_schema::ErrorHandler& eh,
+                           const ::xml_schema::NamespaceInfomap& m = ::xml_schema::NamespaceInfomap (),
+                           const ::std::string& e = "UTF-8",
+                           ::xml_schema::Flags f = 0);
+
+void
+serializeEightPlusPlusApp (::xercesc::XMLFormatTarget& ft,
+                           const ::EightPlusPlusApp_t& x, 
+                           ::xercesc::DOMErrorHandler& eh,
+                           const ::xml_schema::NamespaceInfomap& m = ::xml_schema::NamespaceInfomap (),
+                           const ::std::string& e = "UTF-8",
+                           ::xml_schema::Flags f = 0);
+
+// Serialize to an existing xercesc::DOMDocument.
+//
+
+void
+serializeEightPlusPlusApp (::xercesc::DOMDocument& d,
+                           const ::EightPlusPlusApp_t& x,
+                           ::xml_schema::Flags f = 0);
+
+// Serialize to a new xercesc::DOMDocument.
+//
+
+::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument >
+serializeEightPlusPlusApp (const ::EightPlusPlusApp_t& x, 
+                           const ::xml_schema::NamespaceInfomap& m = ::xml_schema::NamespaceInfomap (),
+                           ::xml_schema::Flags f = 0);
+
+void
+operator<< (::xercesc::DOMElement&, const Linkable&);
+
+void
+operator<< (::xercesc::DOMElement&, const Medium&);
+
+void
+operator<< (::xercesc::DOMElement&, const Tracker&);
+
+void
+operator<< (::xercesc::DOMElement&, const Mapper&);
+
+void
+operator<< (::xercesc::DOMElement&, const TrackerTypeDict&);
+
+void
+operator<< (::xercesc::DOMAttr&, const TrackerTypeDict&);
+
+void
+operator<< (::xml_schema::ListStream&,
+            const TrackerTypeDict&);
+
+void
+operator<< (::xercesc::DOMElement&, const MediumTypeDict&);
+
+void
+operator<< (::xercesc::DOMAttr&, const MediumTypeDict&);
+
+void
+operator<< (::xml_schema::ListStream&,
+            const MediumTypeDict&);
+
+void
+operator<< (::xercesc::DOMElement&, const Link&);
 
 #ifndef XSD_DONT_INCLUDE_INLINE
 #include "eightPlusPlus.ixx"
