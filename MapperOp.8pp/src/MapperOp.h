@@ -55,6 +55,8 @@ private:
 	float       xCropTo;
 	cinder::gl::Texture     texture;
 
+    static float angle(const cinder::Vec2f&, const cinder::Vec2f&);
+
 };
 
 #endif /* CROPPER_H_ */

@@ -6,9 +6,11 @@
  */
 
 #include "MapperOp.h"
+#include <iostream>
 using namespace cinder;
 using namespace cinder::app;
 using namespace gl;
+using namespace std;
 
 MapperOp::MapperOp(){
 	MapperOp(0,0,100,200,0.2, 0.4);
@@ -69,6 +71,15 @@ void MapperOp::mouseDrag( MouseEvent event )
 {
 	if( mTrackedPoint == -1 ) return;
 
+	int before = mTrackedPoint == 0 ? 3:mTrackedPoint - 1;
+	int after = mTrackedPoint == 3? 0: mTrackedPoint + 1;
+
+	Vec2f v1 = mPoints[before] - event.getPos();
+	Vec2f v2 = mPoints[after] - event.getPos();
+	float angl = MapperOp::angle(v1, v2);
+	if (angl>3.0){
+		return;
+	}
 	mPoints[mTrackedPoint] = event.getPos();
 
 	polyline.getPoints()[mTrackedPoint] = mPoints[mTrackedPoint];
@@ -163,3 +174,10 @@ void MapperOp::updateTransform()
 	mTransform[7]	= warpMatrix.ptr<double>(2)[1];
 	mTransform[15]	= warpMatrix.ptr<double>(2)[2];
 }
+
+float MapperOp::angle(const Vec2f& v1, const Vec2f& v2)
+{
+	return acos( v1.dot(v2) / (v1.length() * v2.length()) );
+}
+
+
