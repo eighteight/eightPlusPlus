@@ -106,14 +106,14 @@ int MapperOp::findNearestPt( const Vec2f &aPt, int minDistance )
 	return result;
 }
 
-void MapperOp::draw(int shift){
+void MapperOp::draw(int shift1){
 	if (!texture) return;
 	gl::color(Color(1, 1, 1));
 	gl::pushModelView();
 	gl::multModelView(mTransform);
 
 	texture.enableAndBind();
-	drawTexturedRect(getSourceRect(), getDestinationRect(shift));
+	drawTexturedRect(getSourceRect(), getDestinationRect(shift.x));
 	texture.unbind();
 
 	gl::popModelView();
@@ -173,6 +173,11 @@ void MapperOp::updateTransform()
 	mTransform[3]	= warpMatrix.ptr<double>(2)[0];
 	mTransform[7]	= warpMatrix.ptr<double>(2)[1];
 	mTransform[15]	= warpMatrix.ptr<double>(2)[2];
+}
+
+void MapperOp::setShift(Vec3f shift)
+{
+	this->shift = shift;
 }
 
 float MapperOp::angle(const Vec2f& v1, const Vec2f& v2)

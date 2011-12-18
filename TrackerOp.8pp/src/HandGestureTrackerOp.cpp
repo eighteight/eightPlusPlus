@@ -140,6 +140,11 @@ void XN_CALLBACK_TYPE HandGestureTracker::NoHands(void* UserCxt)
 	}
 }
 
+Vec3f HandGestureTracker::getShift()
+{
+	return Vec3f(*shift,0, 0);
+}
+
 void HandGestureTracker::updatePosition(const float position){
 	*shift = *shift - (int)position;
 }

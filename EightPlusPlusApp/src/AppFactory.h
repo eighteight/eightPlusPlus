@@ -37,6 +37,7 @@ private:
 	std::vector<MapperOpPtr> createMapperOps();
 	std::vector<ITrackerOpPtr> createTrackerOps();
 	std::vector<MediaLinkPtr> createMediaLinks(MediaOpPtr&, std::vector<MapperOpPtr>);
+	std::vector<TrackerLinkPtr> createTrackerLinks(ITrackerOpPtr & trackerOp, std::vector<MapperOpPtr> mapperOps);
 };
 
 #endif /* XMLCONFIG_H_ */

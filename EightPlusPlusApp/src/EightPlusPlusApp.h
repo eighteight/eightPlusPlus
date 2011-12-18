@@ -20,9 +20,6 @@
 #include "boost/signals2.hpp"
 #include <boost/lambda/lambda.hpp>
 
-//#include "eightPlusPlus.hxx"
-
-
 using namespace ci;
 using namespace ci::app;
 using namespace std;
@@ -50,8 +47,6 @@ class EightPlusPlusApp : public AppBasic {
 	AppFactory* 		  appFactory;
 
 	Executable* executable;
-
-//	auto_ptr<EightPlusPlusApp_t> revolverApp;
 
 	float             easing;
 

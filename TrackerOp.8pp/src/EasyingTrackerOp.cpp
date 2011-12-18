@@ -78,6 +78,11 @@ double EasyingTracker::getElapsedSeconds(){
 	return mTimer.getSeconds();
 }
 
+Vec3f EasyingTracker::getShift()
+{
+	return Vec3f(shift, 0, 0);
+}
+
 void   EasyingTracker::resetElapsedSeconds(){
 	mTimer = Timer(true);
 };

@@ -27,6 +27,7 @@ public:
 	void mouseUp(cinder::app:: MouseEvent event);
 	void setup(int* curPosPtr);
 	void reset();
+    Vec3f getShift();
 
 	bool startEase;
 

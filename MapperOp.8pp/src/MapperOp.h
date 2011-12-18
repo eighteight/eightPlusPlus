@@ -34,6 +34,7 @@ public:
 	void updateTransform();
 	void draw();
 	void draw(int shift);
+	void setShift(cinder::Vec3f);
 
 private:
 	int findNearestPt( const cinder::Vec2f &aPt, int minDistance );
@@ -54,6 +55,7 @@ private:
 	float       xCropFrom;
 	float       xCropTo;
 	cinder::gl::Texture     texture;
+	cinder::Vec3f shift;
 
     static float angle(const cinder::Vec2f&, const cinder::Vec2f&);
 

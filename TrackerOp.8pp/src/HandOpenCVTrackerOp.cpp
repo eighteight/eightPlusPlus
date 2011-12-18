@@ -141,3 +141,10 @@ void HandOpenCVTracker::draw()
 
 	params::InterfaceGl::draw();
 }
+
+Vec3f HandOpenCVTracker::getShift()
+{
+	return mTargetPosition;
+}
+
+

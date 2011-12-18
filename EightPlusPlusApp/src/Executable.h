@@ -8,15 +8,12 @@
 #ifndef EXECUTABLE_H_
 #define EXECUTABLE_H_
 
-#include "MediaOp.h"
-#include "MapperOp.h"
 #include "TrackerFactory.h"
 #include "MediaLink.h"
-
-typedef boost::shared_ptr<MediaOp> MediaOpPtr;
+#include "TrackerLink.h"
+#include "EightPlusPlusTypes.h"
 typedef boost::shared_ptr<MediaLink> MediaLinkPtr;
-typedef boost::shared_ptr<ITrackerOp> ITrackerOpPtr;
-
+typedef boost::shared_ptr<TrackerLink> TrackerLinkPtr;
 class Executable {
 public:
 	Executable();
@@ -37,11 +34,14 @@ public:
     MediaOpPtr getMediaOp() const;
     std::vector<MediaLinkPtr> getMediaLinks() const;
     void setMediaLinks(std::vector<MediaLinkPtr> mediaLinks);
+    std::vector<TrackerLinkPtr> getTrackerLinks() const;
+    void setTrackerLinks(std::vector<TrackerLinkPtr> trackerLinks);
 private:
     MediaOpPtr mediaOp;
 	std::vector<MapperOpPtr> mapperOps;
 	std::vector<ITrackerOpPtr> trackerOps;
 	std::vector<MediaLinkPtr> mediaLinks;
+	std::vector<TrackerLinkPtr> trackerLinks;
 };
 
 #endif /* EXECUTABLE_H_ */

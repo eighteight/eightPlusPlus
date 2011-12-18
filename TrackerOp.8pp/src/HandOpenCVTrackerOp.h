@@ -28,6 +28,7 @@ public:
 	void   setup();
 	void   update(const double elapsedTime);
 	void   draw();
+	Vec3f getShift();
 
 private:
 	Kinect mKinect;

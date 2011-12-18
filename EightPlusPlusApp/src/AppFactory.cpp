@@ -37,8 +37,13 @@ Executable *AppFactory::createExecutable() {
 
 	std::vector<MapperOpPtr> mapperOps = createMapperOps();
 	executable->setMapperOps(mapperOps);
-	executable->setTrackerOps(createTrackerOps());
 	executable->setMediaLinks(createMediaLinks(mediaOp, mapperOps));
+
+	std::vector<ITrackerOpPtr> trackerOps = createTrackerOps();
+	executable->setTrackerOps(trackerOps);
+
+	//TODO pass a vector there
+	executable->setTrackerLinks(createTrackerLinks(trackerOps[0],mapperOps));
 
 	return executable;
 }
@@ -115,6 +120,32 @@ std::vector<ITrackerOpPtr> AppFactory::createTrackerOps()
 	}
 	return trackers;
 }
+
+std::vector<TrackerLinkPtr> AppFactory::createTrackerLinks(ITrackerOpPtr & trackerOp, std::vector<MapperOpPtr> mapperOps)
+{
+	std::vector<TrackerLinkPtr> trackerLinks;
+	if (eightPlusPlusApp->getTracker().present()) {
+		cout << " Tracker: " << eightPlusPlusApp->getTracker().get().getType() << endl;
+
+		Linkable::LinkSequence links = eightPlusPlusApp->getTracker().get().getLink();
+
+		for (EightPlusPlusApp_t::LinkConstIterator linkIt(links.begin()); linkIt != links.end(); ++linkIt) {
+			cout<<"Media Link "<<(*linkIt).getSource()<< ": "<<(*linkIt).getTarget()<<endl;
+			string str=(*linkIt).getTarget();
+			size_t pos = str.find("@mapper.")+8;
+			string indStr = str.substr (pos);
+
+			int numb;
+			istringstream ( indStr ) >> numb;
+
+			trackerLinks.push_back(TrackerLinkPtr(new TrackerLink(trackerOp, mapperOps.at(numb))));
+		}
+	}
+
+	return trackerLinks;
+}
+
+
 
 
 

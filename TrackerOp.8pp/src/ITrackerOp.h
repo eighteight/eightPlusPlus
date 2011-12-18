@@ -5,8 +5,8 @@
  *      Author: eight
  */
 #pragma once
-#ifndef IHANDTRACKER_H_
-#define IHANDTRACKER_H_
+#ifndef ITRACKER_H_
+#define ITRACKER_H_
 
 #include "boost/signals2.hpp"
 #include "cinder/app/KeyEvent.h"
@@ -25,6 +25,8 @@ public:
 	virtual void mouseDown(cinder::app::MouseEvent event){};
 	virtual void mouseDrag(cinder::app:: MouseEvent event){};
 	virtual void mouseUp(cinder::app:: MouseEvent event){};
+	virtual Vec3f getShift(){return Vec3f(0,0,0);};
+
 	boost::signals2::signal<void (int)> signalPositionUpdate;
 
 	float easing;
@@ -36,4 +38,4 @@ protected:
 	Timer mTimer;
 };
 
-#endif /* IHANDTRACKER_H_ */
+#endif /* ITRACKER_H_ */

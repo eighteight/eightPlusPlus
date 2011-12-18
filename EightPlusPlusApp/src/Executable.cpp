@@ -33,9 +33,9 @@ std::vector<MapperOpPtr> Executable::getMapperOps() const
     return mapperOps;
 }
 
-void Executable::setTrackerOps(std::vector<ITrackerOpPtr> allocator)
+void Executable::setTrackerOps(std::vector<ITrackerOpPtr> trackerOps)
 {
-	this->trackerOps = allocator;
+	this->trackerOps = trackerOps;
 }
 
 void Executable::setup()
@@ -61,6 +61,11 @@ void Executable::update()
 	vector<MediaLinkPtr>::iterator ml;
 	for (ml = mediaLinks.begin(); ml != mediaLinks.end(); ++ml){
 		(*ml)->update();
+	}
+
+	vector<TrackerLinkPtr>::iterator tl;
+	for (tl = trackerLinks.begin(); tl != trackerLinks.end(); ++tl){
+		(*tl)->update();
 	}
 }
 
@@ -124,6 +129,18 @@ void Executable::setMediaLinks(std::vector<MediaLinkPtr> mediaLinks)
 {
     this->mediaLinks = mediaLinks;
 }
+
+std::vector<TrackerLinkPtr> Executable::getTrackerLinks() const
+{
+    return trackerLinks;
+}
+
+void Executable::setTrackerLinks(std::vector<TrackerLinkPtr> trackerLinks)
+{
+    this->trackerLinks = trackerLinks;
+}
+
+
 
 
 
