@@ -21,8 +21,6 @@
 #include "MediaOp.h"
 #include "TrackerFactory.h"
 
-using namespace cinder;
-
 class AppFactory {
 public:
 	AppFactory(){};
@@ -37,7 +35,7 @@ public:
 private:
     MediaOpPtr createMediaOp();
 	std::vector<MapperOpPtr> createMapperOps();
-	std::vector<ITrackerOp*>* createTrackerOps();
+	std::vector<ITrackerOpPtr> createTrackerOps();
 	std::vector<MediaLinkPtr> createMediaLinks(MediaOpPtr&, std::vector<MapperOpPtr>);
 };
 

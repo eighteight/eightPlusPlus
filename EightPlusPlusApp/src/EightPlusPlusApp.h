@@ -36,7 +36,6 @@ extern bool startEasing;
 class EightPlusPlusApp : public AppBasic {
  public:
 	void    setup();
-	void    setupTracker();
 	void    resize( ResizeEvent event );
 	void    mouseDown( MouseEvent event );
 	void    mouseUp( MouseEvent event );

@@ -7,6 +7,8 @@
 
 #include "Executable.h"
 
+using namespace cinder::app;
+
 Executable::Executable() {
 	// TODO Auto-generated constructor stub
 
@@ -31,7 +33,7 @@ std::vector<MapperOpPtr> Executable::getMapperOps() const
     return mapperOps;
 }
 
-void Executable::setTrackerOps(std::vector<ITrackerOp*> *allocator)
+void Executable::setTrackerOps(std::vector<ITrackerOpPtr> allocator)
 {
 	this->trackerOps = allocator;
 }
@@ -40,13 +42,21 @@ void Executable::setup()
 {
 	mediaOp->load();
 
+	int currentShift = 0;
+
+	vector<ITrackerOpPtr>::iterator itr;
+	for (itr = trackerOps.begin(); itr != trackerOps.end(); ++itr) {
+		(*itr).get()->setup(&currentShift);
+		//(*itr)->signalPositionUpdate.connect(bind(&PositionListener::updatePosition,&positionListener, boost::lambda::_1));
+	}
+
 }
 
 void Executable::update()
 {
-	vector<ITrackerOp*>::iterator itr;
-	for (itr = trackerOps->begin(); itr != trackerOps->end(); ++itr)
-		(*itr)->update(getElapsedSeconds());
+	vector<ITrackerOpPtr>::iterator itr;
+	for (itr = trackerOps.begin(); itr != trackerOps.end(); ++itr)
+		(*itr).get()->update(getElapsedSeconds());
 
 	vector<MediaLinkPtr>::iterator ml;
 	for (ml = mediaLinks.begin(); ml != mediaLinks.end(); ++ml){
@@ -54,7 +64,7 @@ void Executable::update()
 	}
 }
 
-std::vector<ITrackerOp*> *Executable::getTrackerOps() const
+std::vector<ITrackerOpPtr> Executable::getTrackerOps() const
 {
     return trackerOps;
 }
@@ -73,20 +83,41 @@ void Executable::draw(int currentShift)
 {
 	vector<MapperOpPtr>::iterator m;
 	for (m = mapperOps.begin(); m != mapperOps.end(); ++m) {
-		//cout<<"id "<<mediaOp->getTexture().getId()<<endl;
-
-		//(*m).draw(currentShift);
+		(*m).get()->draw(currentShift);
 		(*m).get()->draw();
 	}
 
-	vector<MediaLinkPtr>::iterator ml;
-	for (ml = mediaLinks.begin(); ml != mediaLinks.end(); ++ml){
-		(*ml).get()->getMapperOp().get()->draw(currentShift);
-	}
+	vector<ITrackerOpPtr>::iterator t;
+	for (t = trackerOps.begin(); t != trackerOps.end(); ++t)
+		(*t).get()->draw();
+}
 
-	vector<ITrackerOp*>::iterator t;
-	for (t = trackerOps->begin(); t != trackerOps->end(); ++t)
-		(*t)->draw();
+void Executable::mouseUp(cinder::app::MouseEvent event)
+{
+	vector<MapperOpPtr>::iterator itr;
+	for (itr = mapperOps.begin(); itr != mapperOps.end(); ++itr)
+		(*itr).get()->mouseUp(event);
+}
+
+void Executable::mouseDown(cinder::app::MouseEvent event)
+{
+	vector<MapperOpPtr>::iterator itr;
+	for (itr = mapperOps.begin(); itr != mapperOps.end(); ++itr)
+		(*itr).get()->mouseDown(event);
+}
+
+void Executable::mouseDrag(cinder::app::MouseEvent event)
+{
+	vector<MapperOpPtr>::iterator itr;
+	for (itr = mapperOps.begin(); itr != mapperOps.end(); ++itr)
+		(*itr).get()->mouseDrag(event);
+}
+
+void Executable::keyDown(KeyEvent event)
+{
+	vector<ITrackerOpPtr>::iterator itr;
+	for (itr = trackerOps.begin(); itr != trackerOps.end(); ++itr)
+		(*itr).get()->keyDown(event);
 }
 
 void Executable::setMediaLinks(std::vector<MediaLinkPtr> mediaLinks)

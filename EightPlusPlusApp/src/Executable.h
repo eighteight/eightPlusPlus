@@ -15,6 +15,7 @@
 
 typedef boost::shared_ptr<MediaOp> MediaOpPtr;
 typedef boost::shared_ptr<MediaLink> MediaLinkPtr;
+typedef boost::shared_ptr<ITrackerOp> ITrackerOpPtr;
 
 class Executable {
 public:
@@ -23,19 +24,23 @@ public:
 
     void setMediaOp(MediaOpPtr mediaOp);
     void setMapperOps(std::vector<MapperOpPtr>);
-    void setTrackerOps(std::vector<ITrackerOp*>*);
+    void setTrackerOps(std::vector<ITrackerOpPtr>);
     void setup();
     void update();
     void draw(int);
+    void mouseUp(cinder::app::MouseEvent);
+    void mouseDown(cinder::app::MouseEvent);
+    void mouseDrag(cinder::app::MouseEvent);
+    void keyDown(cinder::app::KeyEvent);
     std::vector<MapperOpPtr> getMapperOps() const;
-    std::vector<ITrackerOp*> *getTrackerOps() const;
+    std::vector<ITrackerOpPtr> getTrackerOps() const;
     MediaOpPtr getMediaOp() const;
     std::vector<MediaLinkPtr> getMediaLinks() const;
     void setMediaLinks(std::vector<MediaLinkPtr> mediaLinks);
 private:
     MediaOpPtr mediaOp;
 	std::vector<MapperOpPtr> mapperOps;
-	std::vector<ITrackerOp*>* trackerOps;
+	std::vector<ITrackerOpPtr> trackerOps;
 	std::vector<MediaLinkPtr> mediaLinks;
 };
 

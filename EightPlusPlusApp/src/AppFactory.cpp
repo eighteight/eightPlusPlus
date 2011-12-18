@@ -7,6 +7,8 @@
 
 #include "AppFactory.h"
 
+using namespace cinder;
+
 AppFactory::AppFactory(const string & resourcePath, const string &xmlFilePath) {
 	bool error = false;
 	try {
@@ -102,18 +104,16 @@ std::vector<MapperOpPtr> AppFactory::createMapperOps()
 	}
 
 	return mappers;
-
 }
 
-std::vector<ITrackerOp*> *AppFactory::createTrackerOps()
+std::vector<ITrackerOpPtr> AppFactory::createTrackerOps()
 {
-	std::vector<ITrackerOp*>* mappers = new std::vector<ITrackerOp*>();
-	std::vector<ITrackerOp*> trackers;
+	std::vector<ITrackerOpPtr> trackers;
 	if (eightPlusPlusApp->getTracker().present()) {
 		cout << " Tracker: " << eightPlusPlusApp->getTracker().get().getType() << endl;
-		mappers->push_back(TrackerFactory::makeTracker(eightPlusPlusApp->getTracker().get().getType().get()));
+		trackers.push_back(ITrackerOpPtr(TrackerFactory::makeTracker(eightPlusPlusApp->getTracker().get().getType().get())));
 	}
-	return mappers;
+	return trackers;
 }
 
 
