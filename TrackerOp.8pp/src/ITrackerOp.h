@@ -27,8 +27,6 @@ public:
 	virtual void mouseUp(cinder::app:: MouseEvent event){};
 	virtual Vec3f getShift(){return Vec3f(0,0,0);};
 
-	boost::signals2::signal<void (int)> signalPositionUpdate;
-
 	float easing;
 protected:
 	virtual double getElapsedSeconds(){return 1;};

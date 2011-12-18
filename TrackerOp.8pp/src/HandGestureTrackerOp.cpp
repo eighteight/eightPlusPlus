@@ -82,7 +82,6 @@ void HandGestureTracker::update(const double elapsedTime){
 			easing = 0.0f;
 		}
 	}
-	signalPositionUpdate(*shift);
 }
 
 

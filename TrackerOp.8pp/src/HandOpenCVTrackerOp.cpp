@@ -96,7 +96,6 @@ void HandOpenCVTracker::update(double elapsedTime){
 					mTargetPosition.x = 640 - center.x;
 					mTargetPosition.y = center.y;
 					mTargetPosition.z = 0;
-					signalPositionUpdate(mTargetPosition.x);
 				}
 			}
 

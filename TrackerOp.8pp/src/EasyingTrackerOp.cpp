@@ -29,8 +29,6 @@ void EasyingTracker::update(const double elapsedTime){
 		easing = easeInBounce(time);
 		shift = easingStart + (int) ((startEase? 1:-1)*(easing*1200));
 
-		signalPositionUpdate(shift);
-
 		*currentPositionPtr = (int)shift;
 
 		if (easing == 1.0f){
