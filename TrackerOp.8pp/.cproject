@@ -26,9 +26,9 @@
 						<entry flags="" kind="libraryFile" name="freenect"/>
 						<entry flags="" kind="libraryFile" name="opencv_core"/>
 						<entry flags="" kind="libraryFile" name="opencv_imgproc"/>
-						<entry flags="" kind="libraryFile" name="XnVNite_1_5_0"/>
-						<entry flags="" kind="libraryFile" name="XnVHandGenerator_1_5_0"/>
-						<entry flags="" kind="libraryFile" name="XnVFeatures_1_5_0"/>
+						<entry flags="" kind="libraryFile" name="XnVNite_1_5_2"/>
+						<entry flags="" kind="libraryFile" name="XnVHandGenerator_1_5_2"/>
+						<entry flags="" kind="libraryFile" name="XnVFeatures_1_5_2"/>
 						<entry flags="" kind="libraryFile" name="usb-1.0"/>
 						<entry flags="" kind="libraryFile" name="OpenNI"/>
 					</externalSetting>

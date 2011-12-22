@@ -44,9 +44,9 @@
 									<listOptionValue builtIn="false" value="freenect"/>
 									<listOptionValue builtIn="false" value="opencv_core"/>
 									<listOptionValue builtIn="false" value="opencv_imgproc"/>
-									<listOptionValue builtIn="false" value="XnVNite_1_5_0"/>
-									<listOptionValue builtIn="false" value="XnVHandGenerator_1_5_0"/>
-									<listOptionValue builtIn="false" value="XnVFeatures_1_5_0"/>
+									<listOptionValue builtIn="false" value="XnVNite_1_5_2"/>
+									<listOptionValue builtIn="false" value="XnVHandGenerator_1_5_2"/>
+									<listOptionValue builtIn="false" value="XnVFeatures_1_5_2"/>
 									<listOptionValue builtIn="false" value="usb-1.0"/>
 									<listOptionValue builtIn="false" value="OpenNI"/>
 								</option>
@@ -162,9 +162,9 @@
 						<entry flags="" kind="libraryFile" name="freenect"/>
 						<entry flags="" kind="libraryFile" name="opencv_core"/>
 						<entry flags="" kind="libraryFile" name="opencv_imgproc"/>
-						<entry flags="" kind="libraryFile" name="XnVNite_1_5_0"/>
-						<entry flags="" kind="libraryFile" name="XnVHandGenerator_1_5_0"/>
-						<entry flags="" kind="libraryFile" name="XnVFeatures_1_5_0"/>
+						<entry flags="" kind="libraryFile" name="XnVNite_1_5_2"/>
+						<entry flags="" kind="libraryFile" name="XnVHandGenerator_1_5_2"/>
+						<entry flags="" kind="libraryFile" name="XnVFeatures_1_5_2"/>
 						<entry flags="" kind="libraryFile" name="usb-1.0"/>
 						<entry flags="" kind="libraryFile" name="OpenNI"/>
 					</externalSetting>
