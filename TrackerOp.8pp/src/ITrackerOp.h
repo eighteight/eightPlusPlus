@@ -19,6 +19,7 @@ const float TWEEN_SPEED = 0.05f;
 class ITrackerOp {
 public:
 	virtual void setup(int *currentPosition){};
+	virtual void setup(){};
 	virtual void update(const double timeLapsed){};
 	virtual void draw(){};
 	virtual void keyDown(cinder::app:: KeyEvent event ){};
