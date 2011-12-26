@@ -46,7 +46,7 @@ void Executable::setup()
 
 	vector<ITrackerOpPtr>::iterator itr;
 	for (itr = trackerOps.begin(); itr != trackerOps.end(); ++itr) {
-		(*itr).get()->setup(&currentShift);
+		(*itr).get()->setup();
 		//(*itr)->signalPositionUpdate.connect(bind(&PositionListener::updatePosition,&positionListener, boost::lambda::_1));
 	}
 
