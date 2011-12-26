@@ -42,14 +42,10 @@ void Executable::setup()
 {
 	mediaOp->load();
 
-	int currentShift = 0;
-
 	vector<ITrackerOpPtr>::iterator itr;
 	for (itr = trackerOps.begin(); itr != trackerOps.end(); ++itr) {
 		(*itr).get()->setup();
-		//(*itr)->signalPositionUpdate.connect(bind(&PositionListener::updatePosition,&positionListener, boost::lambda::_1));
 	}
-
 }
 
 void Executable::update()
