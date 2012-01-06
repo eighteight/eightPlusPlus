@@ -8,7 +8,6 @@
 #ifndef ITRACKER_H_
 #define ITRACKER_H_
 
-#include "boost/signals2.hpp"
 #include "cinder/app/KeyEvent.h"
 #include "cinder/app/MouseEvent.h"
 #include "cinder/Timer.h"
