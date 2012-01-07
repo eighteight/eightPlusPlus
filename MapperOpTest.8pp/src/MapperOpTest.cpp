@@ -14,7 +14,8 @@ void MapperOpTest::setup()
 	gl::enableDepthWrite();
 
 	mapper = new MapperOp(10,10,100,200,0.2, 0.4);
-	loadImageFile();
+	//loadImageFile();
+	loadMovieFile();
 	currentShift = 0;
 }
 
