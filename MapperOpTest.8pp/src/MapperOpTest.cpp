@@ -1,4 +1,8 @@
 #include "MapperOpTest.h"
+
+using namespace ci;
+using namespace ci::app;
+using namespace std;
 int currentShift;
 void MapperOpTest::setup()
 {
@@ -17,10 +21,6 @@ void MapperOpTest::setup()
 	gl::enableAlphaBlending();
 	gl::enableDepthRead();
 	gl::enableDepthWrite();
-
-
-	int tW = APP_INITIAL_WIDTH;
-	int tH = APP_INITIAL_HEIGHT;
 
 	mapper = new MapperOp(10,10,100,200,0.2, 0.4);
 	mapper->setTexture(mTexture);
@@ -74,12 +74,12 @@ void MapperOpTest::draw()
 	if (mTexture){
 		gl::color(Color(1, 1, 1));
 
-		mapper->draw(currentShift);
+		mapper->draw();
 
 		gl::color(Color(1, 1, 1));
 	}
 
-	mapper->draw();
+	mapper->drawControls();
 
 }
 
