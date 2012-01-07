@@ -32,8 +32,8 @@ public:
 
 	void setTexture(cinder::gl::Texture);
 	void updateTransform();
+	void drawControls();
 	void draw();
-	void draw(int shift);
 	void setShift(cinder::Vec3f);
 
 private:

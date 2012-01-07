@@ -51,7 +51,11 @@ Rectf MapperOp::getSourceRect(){
 }
 
 Rectf MapperOp::getDestinationRect(int currentShift){
-	return Rectf(xCropFrom * textureWidth + currentShift, 0.0f * textureHeight, xCropTo * textureWidth + currentShift, 1.0f * textureHeight);
+	if (texture.getTarget() == GL_TEXTURE_2D){
+		return Rectf(xCropFrom + currentShift, 0.0f, xCropTo + currentShift, 1.0f );
+	} else {
+		return Rectf(xCropFrom * textureWidth + currentShift, 0.0f * textureHeight, xCropTo * textureWidth + currentShift, 1.0f * textureHeight);
+	}
 }
 
 MapperOp::~MapperOp() {
@@ -106,9 +110,10 @@ int MapperOp::findNearestPt( const Vec2f &aPt, int minDistance )
 	return result;
 }
 
-void MapperOp::draw(int shift1){
+void MapperOp::draw(){
 	if (!texture) return;
 	gl::color(Color(1, 1, 1));
+	glDisable(GL_TEXTURE_2D);
 	gl::pushModelView();
 	gl::multModelView(mTransform);
 
@@ -144,7 +149,7 @@ void MapperOp::drawTexturedRect( const Rectf &srcRect,  const Rectf &destRec){
 	glDisableClientState( GL_TEXTURE_COORD_ARRAY );
 }
 
-void MapperOp::draw(){
+void MapperOp::drawControls(){
 	glColor3f( 1.0f, 0.5f, 0.25f );
 	for( int i = 0; i < 4; ++i )
 	gl::drawSolidCircle( mPoints[i], 4.0f );
