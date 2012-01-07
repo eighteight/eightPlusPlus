@@ -8,27 +8,41 @@ void MapperOpTest::setup()
 {
 
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-	try {
-		fs::path path = getOpenFilePath( "", ImageIo::getLoadExtensions() );
-		if( ! path.empty() ) {
-			mTexture = gl::Texture( loadImage( path ) );
-		}
-	}
-	catch( ... ) {
-		console() << "unable to load the texture file!" << std::endl;
-	}
 
 	gl::enableAlphaBlending();
 	gl::enableDepthRead();
 	gl::enableDepthWrite();
 
 	mapper = new MapperOp(10,10,100,200,0.2, 0.4);
-	mapper->setTexture(mTexture);
+	loadImageFile();
 	currentShift = 0;
 }
 
-void MapperOpTest::update() {
+void MapperOpTest::loadMovieFile()
+{
+	string moviePath = "/Users/eight/Desktop/water.mov";//getOpenFilePath();
+	console() << "Path: " << moviePath << std::endl;
+	if( ! moviePath.empty() )
+	try {
+		// load up the movie, set it to loop, and begin playing
+		mMovie = qtime::MovieGl( moviePath );
+		mMovie.setLoop();
+		mMovie.play();
+	}
+	catch( ... ) {
+		console() << "Unable to load the movie." << std::endl;
+		mMovie.reset();
+	}
+}
 
+void MapperOpTest::update() {
+	if (mMovie){
+		mTexture = mMovie.getTexture();
+	}
+
+	if (mTexture){
+		mapper->setTexture(mTexture);
+	}
 }
 
 
@@ -94,3 +108,18 @@ void MapperOpTest::prepareSettings( Settings* settings )
 }
 
 CINDER_APP_BASIC( MapperOpTest, RendererGl );
+
+void MapperOpTest::loadImageFile()
+{
+		try {
+			fs::path path = getOpenFilePath( "", ImageIo::getLoadExtensions() );
+			if( ! path.empty() ) {
+				mTexture = gl::Texture( loadImage( path ) );
+			}
+		}
+		catch( ... ) {
+			console() << "unable to load the texture file!" << std::endl;
+		}
+}
+
+

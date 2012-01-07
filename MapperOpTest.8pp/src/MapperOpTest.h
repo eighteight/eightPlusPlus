@@ -4,6 +4,7 @@
 
 #include "cinder/gl/Texture.h"
 #include "cinder/Utilities.h"
+#include "cinder/qtime/QuickTime.h"
 
 #include "MapperOp.h"
 
@@ -26,6 +27,11 @@ class MapperOpTest : public cinder::app::AppBasic {
 	void	prepareSettings( Settings* settings );
 
 	cinder::gl::Texture	      mTexture;
+	void loadMovieFile();
+	void loadImageFile();
+
+	cinder::qtime::MovieGl		mMovie;
+
 
 	MapperOp *mapper;
 
