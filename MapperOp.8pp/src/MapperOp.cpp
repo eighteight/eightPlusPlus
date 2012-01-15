@@ -50,15 +50,16 @@ Rectf MapperOp::getSourceRect(){
 	return Rectf(0, 0, textureWidth, textureHeight);
 }
 
-Rectf MapperOp::getDestinationRect(int currentShift){
+Rectf MapperOp::getDestinationRect(){
 	if (texture.getTarget() == GL_TEXTURE_2D){
-		return Rectf(xCropFrom + currentShift, 0.0f, xCropTo + currentShift, 1.0f );
+		return Rectf(xCropFrom + shift.x/textureWidth, 0.0f, xCropTo + shift.x/textureWidth, 1.0f );
 	} else {
-		return Rectf(xCropFrom * textureWidth + currentShift, 0.0f * textureHeight, xCropTo * textureWidth + currentShift, 1.0f * textureHeight);
+		return Rectf(xCropFrom * textureWidth + shift.x, 0.0f * textureHeight, xCropTo * textureWidth + shift.x, 1.0f * textureHeight);
 	}
 }
 
 MapperOp::~MapperOp() {
+
 }
 
 void MapperOp::mouseDown( MouseEvent event )
@@ -113,20 +114,24 @@ int MapperOp::findNearestPt( const Vec2f &aPt, int minDistance )
 void MapperOp::draw(){
 	if (!texture) return;
 	gl::color(Color(1, 1, 1));
-	glDisable(GL_TEXTURE_2D);
+
 	gl::pushModelView();
 	gl::multModelView(mTransform);
 
+	if (glslProxy) glslProxy->bind();
 	texture.enableAndBind();
-	drawTexturedRect(getSourceRect(), getDestinationRect(shift.x));
+
+	drawTexturedRect(getSourceRect(), getDestinationRect());
+
 	texture.unbind();
+
+	if (glslProxy) glslProxy->unbind();
 
 	gl::popModelView();
 	gl::color(Color(1, 1, 1));
 }
 
 void MapperOp::drawTexturedRect( const Rectf &srcRect,  const Rectf &destRec){
-
 	glEnableClientState( GL_VERTEX_ARRAY );
 	GLfloat verts[8];
 	glVertexPointer( 2, GL_FLOAT, 0, verts );
@@ -185,9 +190,40 @@ void MapperOp::setShift(Vec3f shift)
 	this->shift = shift;
 }
 
+void MapperOp::setGlslProxy(GlslProgramProxyPtr glslProxy)
+{
+    this->glslProxy = glslProxy;
+}
+
+void MapperOp::setCropTo(float cropTo)
+{
+    xCropTo = cropTo;
+}
+
+void MapperOp::setCropFrom(float cropFrom)
+{
+    xCropFrom = cropFrom;
+}
+
+cinder::Vec3f MapperOp::getShift() const
+{
+    return shift;
+}
+
+GlslProgramProxyPtr MapperOp::getGlslProxy() const
+{
+    return glslProxy;
+}
+
 float MapperOp::angle(const Vec2f& v1, const Vec2f& v2)
 {
 	return acos( v1.dot(v2) / (v1.length() * v2.length()) );
 }
+
+
+
+
+
+
 
 

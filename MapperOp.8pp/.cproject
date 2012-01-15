@@ -183,7 +183,7 @@
 				<externalSettings>
 					<externalSetting>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/MapperOp.8pp"/>
-						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/MapperOp.8pp/StaticLib"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/MapperOp.8pp/lib"/>
 						<entry flags="RESOLVED" kind="libraryFile" name="MapperOp"/>
 					</externalSetting>
 				</externalSettings>

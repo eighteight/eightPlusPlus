@@ -14,10 +14,12 @@
 #include "cinder/app/MouseEvent.h"
 #include "cinder/Rect.h"
 #include "cinder/gl/Texture.h"
+#include "cinder/gl/GlslProg.h"
 
 #include "cinder/app/App.h"
 #include "CinderOpenCV.h"
-
+#include "GlslProgramProxy.h"
+typedef boost::shared_ptr<GlslProgramProxy> GlslProgramProxyPtr;
 class MapperOp {
 public:
 	MapperOp();
@@ -35,13 +37,19 @@ public:
 	void drawControls();
 	void draw();
 	void setShift(cinder::Vec3f);
+    void setGlslProxy(GlslProgramProxyPtr glslProxy);
+    void setCropTo(float cropTo);
+    void setCropFrom(float cropFrom);
+    cinder::Vec3f getShift() const;
+    GlslProgramProxyPtr getGlslProxy() const;
+
 
 private:
 	int findNearestPt( const cinder::Vec2f &aPt, int minDistance );
 	void drawTexturedRect( const cinder::Rectf &srcRect,  const cinder::Rectf &destRec);
 
 	cinder::Rectf getSourceRect();
-	cinder::Rectf getDestinationRect(int currentShift);
+	cinder::Rectf getDestinationRect();
 
 	cv::Point2f	mSource[4];
 	cv::Point2f	mDestination[4];
@@ -56,6 +64,8 @@ private:
 	float       xCropTo;
 	cinder::gl::Texture     texture;
 	cinder::Vec3f shift;
+
+	GlslProgramProxyPtr	glslProxy;
 
     static float angle(const cinder::Vec2f&, const cinder::Vec2f&);
 
