@@ -19,7 +19,7 @@ class EasyingTracker: public ITrackerOp {
 public:
 	EasyingTracker();
 	virtual ~EasyingTracker();
-	void update(const double elapsedTime);
+	void update();
 	void draw();
 	void keyDown(cinder::app:: KeyEvent event );
     void mouseDown(cinder::app::MouseEvent event);

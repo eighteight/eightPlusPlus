@@ -26,7 +26,7 @@ public:
 	virtual ~HandOpenCVTracker();
 
 	void   setup();
-	void   update(const double elapsedTime);
+	void   update();
 	void   draw();
 	Vec3f getShift();
 
@@ -40,9 +40,6 @@ private:
 
 	gl::Texture mColorTexture, mDepthTexture, mCvTexture;
 	Surface mDepthSurface;
-
-	Vec3f mTargetPosition;
-
 };
 
 #endif /* HANDOPENCVTRACKER_H_ */

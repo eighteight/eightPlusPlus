@@ -22,7 +22,7 @@ void EasyingTracker::setup(int* curPosPtr){
 	reset();
 }
 
-void EasyingTracker::update(const double elapsedTime){
+void EasyingTracker::update(){
 	if (startEase || startEaseLeft){
 		double ff = fmod( getElapsedSeconds() * TWEEN_SPEED, 1 );
 		float time = math<float>::clamp( ff * 1.5f, 0, 1 );

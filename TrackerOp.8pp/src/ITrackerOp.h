@@ -15,11 +15,11 @@
 using namespace cinder;
 
 const float TWEEN_SPEED = 0.05f;
+
 class ITrackerOp {
 public:
-	virtual void setup(int *currentPosition){};
 	virtual void setup(){};
-	virtual void update(const double timeLapsed){};
+	virtual void update(){};
 	virtual void draw(){};
 	virtual void keyDown(cinder::app:: KeyEvent event ){};
 	virtual void mouseDown(cinder::app::MouseEvent event){};
@@ -28,10 +28,6 @@ public:
 	virtual Vec3f getShift(){return Vec3f(0,0,0);};
 
 	float easing;
-protected:
-	virtual double getElapsedSeconds(){return 1;};
-	virtual void   resetElapsedSeconds(){};
-
 
 	Timer mTimer;
 };

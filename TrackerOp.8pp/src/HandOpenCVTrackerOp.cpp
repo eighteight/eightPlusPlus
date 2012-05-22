@@ -11,7 +11,8 @@ using namespace cinder;
 using namespace ci;
 using namespace std;
 
-
+Vec3f mTPosition;
+bool tracking;
 HandOpenCVTracker::HandOpenCVTracker() {
 	// TODO Auto-generated constructor stub
 
@@ -34,10 +35,10 @@ void HandOpenCVTracker::setup(){
 
 	 mKinect = Kinect( Kinect::Device() );
 
-	 mTargetPosition = Vec3f::zero();
+	 mTPosition = Vec3f::zero();
 }
 
-void HandOpenCVTracker::update(double elapsedTime){
+void HandOpenCVTracker::update(){
 	 if (mKinect.checkNewDepthFrame()) {
 
 		ImageSourceRef depthImage = mKinect.getDepthImage();
@@ -93,9 +94,9 @@ void HandOpenCVTracker::update(double elapsedTime){
 					cv::circle(output, center, radius, color);
 
 					//update the target position
-					mTargetPosition.x = 640 - center.x;
-					mTargetPosition.y = center.y;
-					mTargetPosition.z = 0;
+					mTPosition.x = 640 - center.x;
+					mTPosition.y = center.y;
+					mTPosition.z = 0;
 				}
 			}
 
@@ -136,14 +137,14 @@ void HandOpenCVTracker::draw()
 	gl::enableDepthRead();
 
 	gl::color(Colorf(1.0f, 0.0f, 0.0f));
-	gl::drawSphere(mTargetPosition, 10.0f);
+	gl::drawSphere(mTPosition, 10.0f);
 
 	params::InterfaceGl::draw();
 }
 
 Vec3f HandOpenCVTracker::getShift()
 {
-	return mTargetPosition;
+	return mTPosition;
 }
 
 

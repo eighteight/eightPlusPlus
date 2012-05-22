@@ -25,8 +25,9 @@
 
 #define GESTURE_CLICK "Click"
 #define GESTURE_WAVE "Wave"
+#define GESTURE_CIRCLE "Circle"
 
-#define SAMPLE_XML_PATH "/Users/eight/repos/nite-bin-macosx-v1.4.2.4/Data/Sample-Tracking.xml"
+#define SAMPLE_XML_PATH "/Users/eight/repos/nite-bin-macosx-v1.5.2.7/Data/Sample-Tracking.xml"
 
 using namespace ci;
 using namespace ci::app;
@@ -56,14 +57,17 @@ if (rc != XN_STATUS_OK)                                      \
 		return (rc);						\
 	}
 
+
 class HandGestureTracker : public ITrackerOp{
 public:
 	HandGestureTracker();
-	virtual ~HandGestureTracker();
-	void   setup(int *currentPosition);
-	void   update(const double elapsedTime);
-	void setPositionListener(void (*f)(double)){};
+    ~HandGestureTracker();
+	void setup();
+	void draw();
+	bool isTracking();
+	void update();
 	Vec3f getShift();
+	Vec3f getTargetPosition() const;
 	static void XN_CALLBACK_TYPE Gesture_Recognized(GestureGenerator& generator, const XnChar* strGesture, const XnPoint3D* pIDPosition, const XnPoint3D* pEndPosition, void* pCookie);
 	static void XN_CALLBACK_TYPE Gesture_Process(GestureGenerator& generator, const XnChar* strGesture, const XnPoint3D* pPosition, XnFloat fProgress, void* pCookie);
 	static void XN_CALLBACK_TYPE Hand_Update(HandsGenerator& generator, XnUserID nId, const XnPoint3D* pPosition, XnFloat fTime, void* pCookie);
@@ -74,7 +78,7 @@ public:
 	static void XN_CALLBACK_TYPE SessionStarting(const XnPoint3D& ptPosition, void* UserCxt);
 	static void XN_CALLBACK_TYPE SessionEnding(void* UserCxt);
 
-	static void updatePosition(const float position);
+	static void updatePosition(const XnPoint3D position);
 
 	float               easing;
 };

@@ -22,16 +22,17 @@ SessionState g_SessionState = NOT_IN_SESSION;
 
 int *shift;
 bool startEase;
-
+Vec3f mTrackPosition;
+bool tracked;
 HandGestureTracker::HandGestureTracker() {
 }
 
 HandGestureTracker::~HandGestureTracker() {
 }
 
-void HandGestureTracker::setup(int *currentPosition){
-	startEase = false;
-	shift = currentPosition;
+void HandGestureTracker::setup(){
+	tracked = false;
+	shift = 0;
 	XnStatus rc = XN_STATUS_OK;
 	xn::EnumerationErrors errors;
 
@@ -46,7 +47,7 @@ void HandGestureTracker::setup(int *currentPosition){
 //
 	// Create NITE objects
 	g_pSessionManager = new XnVSessionManager;
-	rc = g_pSessionManager->Initialize(&context, "Click,Wave", "RaiseHand");
+	rc = g_pSessionManager->Initialize(&context, "Click,Wave,Circle", "RaiseHand");
 	CHECK_RC(rc, "SessionManager::Initialize");
 //
 	g_pSessionManager->RegisterSession(NULL, SessionStarting, SessionEnding, FocusProgress);
@@ -65,23 +66,40 @@ void HandGestureTracker::setup(int *currentPosition){
     CHECK_RC(nRetVal, "Start Generating All Data");
     nRetVal = g_GestureGenerator.AddGesture(GESTURE_CLICK, boundingBox);
     nRetVal = g_GestureGenerator.AddGesture(GESTURE_WAVE, boundingBox);
+    nRetVal = g_GestureGenerator.AddGesture(GESTURE_CIRCLE, boundingBox);
 }
 
-void HandGestureTracker::update(const double elapsedTime){
+void HandGestureTracker::update(){
 	XnStatus nRetVal = context.WaitAnyUpdateAll();
 	CHECK_RC(nRetVal, "HandGestureTracker::update");
 	g_pSessionManager->Update(&context);
 
-	if (startEase){
-		float time = math<float>::clamp( fmod( elapsedTime * TWEEN_SPEED, 1 ) * 1.5f, 0, 1 );
-		easing = easeInCirc(time);
-		console()<<"EEE:"<<easing<<endl;
-		updatePosition(-easing*10);
-		if (easing == 1.0f){
-			startEase = false;
-			easing = 0.0f;
-		}
-	}
+//	if (tracking){
+//		float time = math<float>::clamp( fmod( elapsedTime * TWEEN_SPEED, 1 ) * 1.5f, 0, 1 );
+//		easing = easeInCirc(time);
+//		//updatePosition(-easing*10);
+//		if (easing == 1.0f){
+//			tracking = false;
+//			easing = 0.0f;
+//		}
+//	}
+}
+
+void HandGestureTracker::draw() {
+	gl::setMatricesWindow( getWindowSize() );
+	// this pair of lines is the standard way to clear the screen in OpenGL
+	gl::clear( Color( 0.1f, 0.1f, 0.1f ) );
+
+	// We'll set the color to an orange color
+	glColor3f( 1.0f, 0.5f, 0.25f );
+
+	// now tell OpenGL we've got a series of points it should draw lines between
+
+	gl::drawSolidCircle( Vec2f( mTrackPosition.x, mTrackPosition.y ), 10.0f );
+	//glVertex2f( Vec2f(position.X, position.Y) );
+
+	// tell OpenGL to actually draw the lines now
+	glEnd();
 }
 
 
@@ -89,6 +107,15 @@ void XN_CALLBACK_TYPE HandGestureTracker::Gesture_Recognized(GestureGenerator& g
 {
 	printf("Gesture recognized: %s\n", strGesture);
 	g_GestureGenerator.RemoveGesture(strGesture);
+	char szKey[] = GESTURE_CLICK;
+	if (strcmp (strGesture,szKey) == 0){
+		tracked = true;
+		g_GestureGenerator.AddGesture(GESTURE_WAVE, NULL);
+	} else {
+		tracked = false;
+		g_GestureGenerator.AddGesture(GESTURE_CLICK, NULL);
+	}
+
 	g_HandsGenerator.StartTracking(*pEndPosition);
 }
 
@@ -96,20 +123,20 @@ void XN_CALLBACK_TYPE HandGestureTracker::Gesture_Process(GestureGenerator& gene
 
 void XN_CALLBACK_TYPE HandGestureTracker::Hand_Create(xn::HandsGenerator& generator, XnUserID nId, const XnPoint3D* pPosition, XnFloat fTime, void* pCookie)
 {
-	startEase = false;
-    printf("New Hand: %d @ (%f %b)\n", nId, pPosition->X, startEase);
+    printf("New Hand: %d @ (%f %b)\n", nId, pPosition->X);
 }
 
 void XN_CALLBACK_TYPE HandGestureTracker::Hand_Update(HandsGenerator& generator, XnUserID nId, const XnPoint3D* pPosition, XnFloat fTime, void* pCookie) {
-	updatePosition(pPosition->X*0.01);
-	startEase = false;
-	printf("Update Hand: %d @ (%f %d)\n", nId, pPosition->X, shift);
-
+	XnPoint3D       point;
+	g_DepthGenerator.ConvertRealWorldToProjective(1, pPosition, &point);
+	mTrackPosition = Vec3f(point.X, point.Y, point.Z);
+	updatePosition(point);
+	tracked = true;
 }
 void XN_CALLBACK_TYPE HandGestureTracker::Hand_Destroy(xn::HandsGenerator& generator, XnUserID nId, XnFloat fTime, void* pCookie)
 {
 	printf("Lost Hand: %d\n", nId);
-	startEase = true;
+	tracked = false;
 	g_GestureGenerator.AddGesture(GESTURE_CLICK, NULL);
 }
 
@@ -141,10 +168,20 @@ void XN_CALLBACK_TYPE HandGestureTracker::NoHands(void* UserCxt)
 
 Vec3f HandGestureTracker::getShift()
 {
-	return Vec3f(*shift,0, 0);
+	return Vec3f((float)*shift,0.0f, 0.0f);
 }
 
-void HandGestureTracker::updatePosition(const float position){
-	*shift = *shift - (int)position;
+void HandGestureTracker::updatePosition(const XnPoint3D position){
+	shift = shift - (int)position.X;
+}
+
+Vec3f HandGestureTracker::getTargetPosition() const
+{
+	return Vec3f(mTrackPosition.x,mTrackPosition.y,mTrackPosition.z);
+}
+
+bool HandGestureTracker::isTracking()
+{
+	return tracked;
 }
 

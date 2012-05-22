@@ -5,6 +5,11 @@
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
 		<cconfiguration id="cdt.managedbuild.toolchain.gnu.macosx.base.1873825215.1383769673">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.toolchain.gnu.macosx.base.1873825215.1383769673" moduleId="org.eclipse.cdt.core.settings" name="lib">
+				<macros>
+					<stringMacro name="CINDER_PATH" type="VALUE_PATH_DIR" value="/Users/${LOGNAME}/repos/Cinder"/>
+					<stringMacro name="OPENNI_PATH" type="VALUE_PATH_DIR" value="/usr/include/ni/"/>
+					<stringMacro name="NITE_PATH" type="VALUE_PATH_DIR" value="/usr/include/nite/"/>
+				</macros>
 				<externalSettings>
 					<externalSetting>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/TrackerOp.8pp/src"/>
@@ -18,6 +23,8 @@
 						<entry flags="RESOLVED" kind="includePath" name="/Users/eight/repos/Cinder/include"/>
 						<entry flags="RESOLVED" kind="includePath" name="/Users/eight/repos/Cinder/blocks/BlockOpenNI/include"/>
 						<entry flags="RESOLVED" kind="includePath" name="/Users/eight/repos/Cinder/blocks/BlockOpenNI/include/OpenNI"/>
+						<entry flags="RESOLVED" kind="includePath" name="/usr/include/ni"/>
+						<entry flags="RESOLVED" kind="includePath" name="/usr/include/nite/"/>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/TrackerOp.8pp/lib"/>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/TrackerOp.8pp/libs"/>
 						<entry flags="" kind="libraryPath" name="${CINDER_PATH}/blocks/Cinder-OpenCV/lib/macosx"/>
@@ -88,8 +95,8 @@
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/blocks/Cinder-Kinect/src&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/blocks/Cinder-Kinect/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/boost&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${OPENNI_PATH}/include/&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${NITE_PATH}/include/&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${OPENNI_INCLUDE_PATH}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${NITE_INCLUDE_PATH}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.484560092" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
@@ -102,8 +109,8 @@
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/blocks/Cinder-Kinect/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/boost&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/blocks/BlockOpenNI/include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${OPENNI_PATH}/include/&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${NITE_PATH}/include/&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${OPENNI_INCLUDE_PATH}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${NITE_INCLUDE_PATH}&quot;"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.optimization.level.1905925305" name="Optimization Level" superClass="gnu.cpp.compiler.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.other.other.1186956528" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 -arch i386" valueType="string"/>
@@ -121,8 +128,8 @@
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/blocks/Cinder-Kinect/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/blocks/BlockOpenNI/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CINDER_PATH}/blocks/BlockOpenNI/include/OpenNI&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${OPENNI_PATH}/include/&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${NITE_PATH}/include/&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${OPENNI_INCLUDE_PATH}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${NITE_INCLUDE_PATH}&quot;"/>
 								</option>
 								<option id="gnu.c.compiler.option.warnings.allwarn.77949422" name="All warnings (-Wall)" superClass="gnu.c.compiler.option.warnings.allwarn" value="false" valueType="boolean"/>
 								<option id="gnu.c.compiler.option.warnings.nowarn.840727428" name="Inhibit all warnings (-w)" superClass="gnu.c.compiler.option.warnings.nowarn" value="true" valueType="boolean"/>
