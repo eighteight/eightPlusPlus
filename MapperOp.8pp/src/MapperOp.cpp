@@ -14,6 +14,9 @@ using namespace std;
 
 MapperOp::MapperOp(){
 	MapperOp(0,0,100,200,0.2, 0.4);
+	isSelected = false;
+	isDragged = false;
+	justRespondedToDoubleClick = false;
 }
 
 MapperOp::MapperOp(const int x, const int y, const int width, const int height,  const float xCropFro, const float xCropT)
@@ -62,8 +65,12 @@ MapperOp::~MapperOp() {
 
 }
 
-void MapperOp::mouseDown( MouseEvent event )
-{
+void MapperOp::mouseDown( MouseEvent event ) {
+	if (isDoubleClick()){
+		if (polyline.contains(event.getPos())){
+			isSelected = !isSelected;
+		}
+	}
 	mTrackedPoint = findNearestPt( event.getPos(), MOUSE_TOLERANCE);
 }
 
@@ -72,12 +79,42 @@ void MapperOp::mouseUp( MouseEvent event )
 	mTrackedPoint = -1;
 }
 
-void MapperOp::mouseDrag( MouseEvent event )
-{
-	if( mTrackedPoint == -1 ) return;
+void MapperOp::mouseDrag( MouseEvent event ){
+	if (isSelected){
+		if (polyline.contains(event.getPos())){
+			dragQuad(event);
+		} else {
+			isDragged = false;
+		}
+	} else {
+		isDragged = false;
+		dragPoint(event, mTrackedPoint);
+	}
+	updateTransform();
+}
 
-	int before = mTrackedPoint == 0 ? 3:mTrackedPoint - 1;
-	int after = mTrackedPoint == 3? 0: mTrackedPoint + 1;
+void MapperOp::dragQuad( MouseEvent event){
+	if (!isDragged) {
+		mPrevPos = event.getPos();
+		isDragged = true;
+		return;
+	}
+	Vec2f delta = event.getPos() - mPrevPos;
+	for (int i = 0; i < 4; i++) {
+		mPoints[i] += delta;
+	}
+	for (uint i=0; i < polyline.size(); i++){
+		polyline.getPoints()[i] += delta;
+	}
+
+	mPrevPos = event.getPos();
+}
+
+void MapperOp::dragPoint(MouseEvent event, int trackedPoint){
+	if( trackedPoint == -1 ) return;
+
+	int before = trackedPoint == 0 ? 3:trackedPoint - 1;
+	int after = trackedPoint == 3? 0: trackedPoint + 1;
 
 	Vec2f v1 = mPoints[before] - event.getPos();
 	Vec2f v2 = mPoints[after] - event.getPos();
@@ -85,12 +122,10 @@ void MapperOp::mouseDrag( MouseEvent event )
 	if (angl>3.0){
 		return;
 	}
-	mPoints[mTrackedPoint] = event.getPos();
+	mPoints[trackedPoint] = event.getPos();
 
-	polyline.getPoints()[mTrackedPoint] = mPoints[mTrackedPoint];
+	polyline.getPoints()[trackedPoint] = mPoints[trackedPoint];
 	polyline.getPoints()[4]=mPoints[0];
-
-	updateTransform();
 }
 
 int MapperOp::findNearestPt( const Vec2f &aPt, int minDistance )
@@ -155,7 +190,11 @@ void MapperOp::drawTexturedRect( const Rectf &srcRect,  const Rectf &destRec){
 }
 
 void MapperOp::drawControls(){
-	glColor3f( 1.0f, 0.5f, 0.25f );
+	if (isSelected){
+		glColor3f( 1.0f, 0.5f, 0.25f );
+	} else {
+		glColor3f( 1.0f, 1.0f, 1.0f );
+	}
 	for( int i = 0; i < 4; ++i )
 	gl::drawSolidCircle( mPoints[i], 4.0f );
 	gl::draw(polyline);
@@ -219,6 +258,22 @@ float MapperOp::angle(const Vec2f& v1, const Vec2f& v2)
 {
 	return acos( v1.dot(v2) / (v1.length() * v2.length()) );
 }
+
+bool MapperOp::isDoubleClick()
+{
+	thisClockReading = float(clock())/float(CLOCKS_PER_SEC);
+	float delta = thisClockReading - lastClockReading;
+
+	if( (delta <= DOUBLE_CLICK_TIME) && !justRespondedToDoubleClick ) {
+		justRespondedToDoubleClick = true;
+		return true;
+	}
+	justRespondedToDoubleClick = false;
+	lastClockReading = thisClockReading;
+	return false;
+}
+
+
 
 
 

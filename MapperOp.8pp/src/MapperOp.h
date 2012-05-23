@@ -20,6 +20,7 @@
 #include "CinderOpenCV.h"
 #include "GlslProgramProxy.h"
 typedef boost::shared_ptr<GlslProgramProxy> GlslProgramProxyPtr;
+#define DOUBLE_CLICK_TIME 0.1F
 class MapperOp {
 public:
 	MapperOp();
@@ -29,7 +30,6 @@ public:
 
 	void mouseDown(cinder::app::MouseEvent event );
 	void mouseUp(cinder::app::MouseEvent event );
-
 	void mouseDrag(cinder::app::MouseEvent event );
 
 	void setTexture(cinder::gl::Texture);
@@ -41,12 +41,15 @@ public:
     void setCropTo(float cropTo);
     void setCropFrom(float cropFrom);
     cinder::Vec3f getShift() const;
+    bool isDoubleClick();
     GlslProgramProxyPtr getGlslProxy() const;
-
 
 private:
 	int findNearestPt( const cinder::Vec2f &aPt, int minDistance );
 	void drawTexturedRect( const cinder::Rectf &srcRect,  const cinder::Rectf &destRec);
+
+	void dragQuad(cinder::app::MouseEvent);
+	void dragPoint(cinder::app::MouseEvent, int pointNumber);
 
 	cinder::Rectf getSourceRect();
 	cinder::Rectf getDestinationRect();
@@ -57,6 +60,7 @@ private:
 
 	cinder::PolyLine<cinder::Vec2f>	polyline;
 	cinder::Vec2f				mPoints[4];
+	cinder::Vec2f               mPrevPos;
 	int					mTrackedPoint;
 	int         textureWidth;
 	int         textureHeight;
@@ -68,7 +72,10 @@ private:
 	GlslProgramProxyPtr	glslProxy;
 
     static float angle(const cinder::Vec2f&, const cinder::Vec2f&);
-
+	bool isSelected;
+	bool isDragged;
+	float thisClockReading, lastClockReading;
+	bool justRespondedToDoubleClick;
 };
 
 #endif /* CROPPER_H_ */
